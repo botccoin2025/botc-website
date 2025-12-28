@@ -10,7 +10,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -128,6 +128,7 @@
       border-radius: 10px;
       border:1px solid transparent;
       transition: .18s ease;
+      white-space: nowrap;
     }
     nav .links a:hover{
       color: var(--text);
@@ -357,9 +358,8 @@
     .divider{ height:1px; background: rgba(255,255,255,.10); margin: 8px 0; }
 
     /* Sections */
-    section{
-      padding: 22px 0;
-    }
+    section{ padding: 22px 0; }
+
     .section-title{
       display:flex;
       align-items:flex-end;
@@ -378,7 +378,7 @@
       margin:0;
       color: var(--muted2);
       font-size: 12.8px;
-      max-width: 56ch;
+      max-width: 62ch;
       line-height:1.45;
     }
 
@@ -408,9 +408,7 @@
     .tile h4{ margin: 0 0 6px; font-size: 14px; letter-spacing:.01em; }
     .tile p{ margin: 0; font-size: 12.8px; line-height:1.55; color: var(--muted); }
 
-    .chips{
-      display:flex; flex-wrap:wrap; gap:8px; margin-top: 10px;
-    }
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top: 10px; }
     .chip{
       padding: 7px 10px;
       border-radius:999px;
@@ -451,6 +449,75 @@
     }
     .item b{ display:block; font-size: 13px; margin-bottom:2px; }
     .item span{ display:block; font-size: 12.6px; color: var(--muted); line-height:1.45; }
+
+    /* Founder block */
+    .founder{
+      display:grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .founder-figure{
+      padding: 14px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      position:relative;
+    }
+    .founder-figure:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(320px 200px at 30% 0%, rgba(34,211,238,.14), transparent 60%),
+        radial-gradient(320px 200px at 90% 100%, rgba(59,130,246,.12), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .founder-figure > *{ position:relative; }
+    .founder-img{
+      width:100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      display:block;
+    }
+    .caption{
+      margin-top: 10px;
+      color: var(--muted2);
+      font-size: 12.2px;
+      line-height: 1.45;
+    }
+    .founder-bio{
+      padding: 16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .founder-bio h4{
+      margin: 2px 0 8px;
+      font-size: 14px;
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      color: rgba(234,240,255,.90);
+    }
+    .bio-text{
+      margin:0;
+      font-size: 12.9px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .bio-note{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted2);
+      line-height: 1.55;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 10px;
+    }
 
     /* FAQ */
     details{
@@ -497,12 +564,17 @@
     .foot a:hover{ color:var(--text); border-color: rgba(255,255,255,.18); }
 
     /* Responsive */
-    @media (max-width: 980px){
+    @media (max-width: 1080px){
       nav .links{ display:none; }
       .actions{ min-width: auto; }
+    }
+
+    @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
       .grid3{ grid-template-columns: 1fr; }
       .two{ grid-template-columns: 1fr; }
+      .founder{ grid-template-columns: 1fr; }
+      .founder-img{ height: 360px; }
       .brand{ min-width:auto; }
     }
 
@@ -513,6 +585,7 @@
       .btn{ width:100%; justify-content:center; }
       .pill{ width:100%; justify-content:space-between; }
       .lang-switch button{ padding: 8px 9px; }
+      .founder-img{ height: 320px; }
     }
   </style>
 </head>
@@ -533,6 +606,7 @@
 
         <nav class="links" aria-label="Primary">
           <a href="#about" data-i18n="navAbout">About</a>
+          <a href="#founder" data-i18n="navFounder">Founder</a>
           <a href="#tokenomics" data-i18n="navTokenomics">Tokenomics</a>
           <a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
           <a href="#faq" data-i18n="navFaq">FAQ</a>
@@ -576,7 +650,7 @@
             BOTC is a community-driven crypto initiative focused on transparency, resilience, and long-term vision.
           </p>
 
-          <!-- IMPORTANT DISCLAIMER (as you asked: right at the top) -->
+          <!-- IMPORTANT DISCLAIMER -->
           <div class="notice" role="note" aria-label="Important notice">
             <div class="ic" aria-hidden="true">!</div>
             <p>
@@ -588,6 +662,10 @@
           </div>
 
           <div class="hero-cta">
+            <a class="btn" href="#founder">
+              <span aria-hidden="true">👤</span>
+              <span data-i18n="ctaFounder">Founder profile</span>
+            </a>
             <a class="btn" href="#tokenomics">
               <span aria-hidden="true">📊</span>
               <span data-i18n="ctaTokenomics">View tokenomics</span>
@@ -595,10 +673,6 @@
             <a class="btn" href="#roadmap">
               <span aria-hidden="true">🧭</span>
               <span data-i18n="ctaRoadmap">Explore roadmap</span>
-            </a>
-            <a class="btn" href="#contact">
-              <span aria-hidden="true">🤝</span>
-              <span data-i18n="ctaContact">Join & contact</span>
             </a>
           </div>
 
@@ -641,6 +715,7 @@
             </div>
             <div class="chips">
               <a class="chip" href="#about" data-i18n="chipAbout">About</a>
+              <a class="chip" href="#founder" data-i18n="chipFounder">Founder</a>
               <a class="chip" href="#tokenomics" data-i18n="chipTokenomics">Tokenomics</a>
               <a class="chip" href="#faq" data-i18n="chipFaq">FAQ</a>
               <a class="chip" href="#contact" data-i18n="chipContact">Contact</a>
@@ -659,30 +734,103 @@
       </div>
     </section>
 
-    <!-- ABOUT / FEATURES -->
+    <!-- ABOUT / BOTC IDENTITY -->
     <section id="about">
       <div class="section-title">
         <h2 data-i18n="aboutTitle">About BOTC</h2>
-        <p data-i18n="aboutDesc">A clean, professional foundation: clarity, security mindset, and a community-first approach.</p>
+        <p data-i18n="aboutDesc">
+          A clean, professional foundation: clarity, security mindset, and a community-first approach.
+        </p>
       </div>
 
-      <div class="grid3">
+      <div class="two">
         <div class="tile">
-          <h4 data-i18n="f1Title">Transparency</h4>
-          <p data-i18n="f1Text">Clear communication, public updates, and a focus on trust — no confusion, no hidden talk.</p>
+          <h4 data-i18n="aboutBotcTitle">What is BOTC?</h4>
+          <p data-i18n="aboutBotcText">
+            BOTC (Botcoin) is an independent crypto project built with a community-first mindset, focused on transparency,
+            responsibility, and long-term vision. We do not sell dreams — we build structure.
+          </p>
+          <div class="chips">
+            <span class="chip" data-i18n="aboutChip1">Community-first</span>
+            <span class="chip" data-i18n="aboutChip2">Transparency</span>
+            <span class="chip" data-i18n="aboutChip3">Long-term</span>
+          </div>
         </div>
+
         <div class="tile">
-          <h4 data-i18n="f2Title">Security mindset</h4>
-          <p data-i18n="f2Text">We promote safe practices: no seed sharing, no shady DMs, and strong anti-scam culture.</p>
-        </div>
-        <div class="tile">
-          <h4 data-i18n="f3Title">Long-term vision</h4>
-          <p data-i18n="f3Text">We build step-by-step: structure first, then growth, partnerships, and expansion.</p>
+          <h4 data-i18n="aboutValuesTitle">Values</h4>
+          <div class="list">
+            <div class="item">
+              <div class="bullet">🧭</div>
+              <div>
+                <b data-i18n="val1Title">Direction</b>
+                <span data-i18n="val1Text">Real steps, real updates, no empty promises.</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="bullet">🛡️</div>
+              <div>
+                <b data-i18n="val2Title">Protection mindset</b>
+                <span data-i18n="val2Text">Strong anti-scam culture: no seed requests, no pressure tactics.</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="bullet">🤝</div>
+              <div>
+                <b data-i18n="val3Title">Respect</b>
+                <span data-i18n="val3Text">We act with professionalism, integrity and respect for the community.</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- TOKENOMICS + ROADMAP -->
+    <!-- FOUNDER -->
+    <section id="founder">
+      <div class="section-title">
+        <h2 data-i18n="founderTitle">Founder</h2>
+        <p data-i18n="founderDesc">
+          The human side of the project — built with responsibility and long-term focus.
+        </p>
+      </div>
+
+      <div class="founder">
+        <div class="founder-figure">
+          <!-- IMPORTANT:
+               Put your founder image in your repo at: /img/founder.jpg
+               Example structure:
+               /img/founder.jpg
+               If you use PNG instead, change to /img/founder.png
+          -->
+          <img class="founder-img" src="img/founder.jpg" alt="BOTC Founder" />
+          <div class="caption" data-i18n="founderCaption">
+            Founder portrait — official BOTC project image.
+          </div>
+        </div>
+
+        <div class="founder-bio">
+          <h4 data-i18n="bioTitle">Founder biography</h4>
+          <p class="bio-text" data-i18n="bioText">
+            BOTC was created by a builder and blockchain enthusiast with a strong sense of responsibility and a clear vision:
+            create a transparent, respectful project in a space often dominated by empty promises.
+            The focus is long-term — with structure first, clear communication, and community protection as a priority.
+          </p>
+
+          <div class="bio-note" data-i18n="bioNote">
+            Founder details are currently being finalized and will be disclosed at a later stage.
+          </div>
+
+          <div class="chips" style="margin-top:12px;">
+            <span class="chip" data-i18n="bioChip1">Integrity</span>
+            <span class="chip" data-i18n="bioChip2">Discipline</span>
+            <span class="chip" data-i18n="bioChip3">Community protection</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS -->
     <section id="tokenomics">
       <div class="section-title">
         <h2 data-i18n="tokTitle">Tokenomics</h2>
@@ -746,6 +894,7 @@
       </div>
     </section>
 
+    <!-- ROADMAP -->
     <section id="roadmap">
       <div class="section-title">
         <h2 data-i18n="roadTitle">Roadmap</h2>
@@ -846,6 +995,7 @@
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
           <a href="#top" data-i18n="footTop">Back to top</a>
+          <a href="#founder" data-i18n="footFounder">Founder</a>
           <a href="#faq" data-i18n="footFaq">FAQ</a>
           <a href="#tokenomics" data-i18n="footTok">Tokenomics</a>
         </div>
@@ -860,7 +1010,9 @@
     const i18n = {
       en: {
         brandTag: "Botcoin Project • Community-first",
+
         navAbout: "About",
+        navFounder: "Founder",
         navTokenomics: "Tokenomics",
         navRoadmap: "Roadmap",
         navFaq: "FAQ",
@@ -876,9 +1028,9 @@
         noticeTitle: "Important:",
         noticeText: "BOTC does not protect or guarantee any financial losses. Crypto is volatile — participate only if you understand the risks.",
 
+        ctaFounder: "Founder profile",
         ctaTokenomics: "View tokenomics",
         ctaRoadmap: "Explore roadmap",
-        ctaContact: "Join & contact",
         miniNote: "Tip: Use the language buttons (EN/PT/FR/DE). Your choice is saved automatically.",
 
         sideTitle: "Status",
@@ -889,6 +1041,7 @@
         network: "Network",
         quickLinks: "Quick links",
         chipAbout: "About",
+        chipFounder: "Founder",
         chipTokenomics: "Tokenomics",
         chipFaq: "FAQ",
         chipContact: "Contact",
@@ -896,12 +1049,28 @@
 
         aboutTitle: "About BOTC",
         aboutDesc: "A clean, professional foundation: clarity, security mindset, and a community-first approach.",
-        f1Title: "Transparency",
-        f1Text: "Clear communication, public updates, and a focus on trust — no confusion, no hidden talk.",
-        f2Title: "Security mindset",
-        f2Text: "We promote safe practices: no seed sharing, no shady DMs, and strong anti-scam culture.",
-        f3Title: "Long-term vision",
-        f3Text: "We build step-by-step: structure first, then growth, partnerships, and expansion.",
+        aboutBotcTitle: "What is BOTC?",
+        aboutBotcText: "BOTC (Botcoin) is an independent crypto project built with a community-first mindset, focused on transparency, responsibility, and long-term vision. We do not sell dreams — we build structure.",
+        aboutChip1: "Community-first",
+        aboutChip2: "Transparency",
+        aboutChip3: "Long-term",
+        aboutValuesTitle: "Values",
+        val1Title: "Direction",
+        val1Text: "Real steps, real updates, no empty promises.",
+        val2Title: "Protection mindset",
+        val2Text: "Strong anti-scam culture: no seed requests, no pressure tactics.",
+        val3Title: "Respect",
+        val3Text: "We act with professionalism, integrity and respect for the community.",
+
+        founderTitle: "Founder",
+        founderDesc: "The human side of the project — built with responsibility and long-term focus.",
+        founderCaption: "Founder portrait — official BOTC project image.",
+        bioTitle: "Founder biography",
+        bioText: "BOTC was created by a builder and blockchain enthusiast with a strong sense of responsibility and a clear vision: create a transparent, respectful project in a space often dominated by empty promises. The focus is long-term — with structure first, clear communication, and community protection as a priority.",
+        bioNote: "Founder details are currently being finalized and will be disclosed at a later stage.",
+        bioChip1: "Integrity",
+        bioChip2: "Discipline",
+        bioChip3: "Community protection",
 
         tokTitle: "Tokenomics",
         tokDesc: "These values are placeholders you can edit later. The layout is ready and professional.",
@@ -959,13 +1128,16 @@
 
         footNote: "Use at your own risk. This is not financial advice.",
         footTop: "Back to top",
+        footFounder: "Founder",
         footFaq: "FAQ",
         footTok: "Tokenomics"
       },
 
       pt: {
         brandTag: "Projeto Botcoin • Comunidade em primeiro",
+
         navAbout: "Sobre",
+        navFounder: "Fundador",
         navTokenomics: "Tokenomics",
         navRoadmap: "Roadmap",
         navFaq: "FAQ",
@@ -981,9 +1153,9 @@
         noticeTitle: "Importante:",
         noticeText: "O BOTC não protege nem garante quaisquer perdas financeiras. Cripto é volátil — participa apenas se compreendes os riscos.",
 
+        ctaFounder: "Perfil do fundador",
         ctaTokenomics: "Ver tokenomics",
         ctaRoadmap: "Explorar roadmap",
-        ctaContact: "Entrar & contacto",
         miniNote: "Dica: Usa os botões de idioma (EN/PT/FR/DE). A tua escolha fica guardada.",
 
         sideTitle: "Estado",
@@ -994,6 +1166,7 @@
         network: "Rede",
         quickLinks: "Atalhos",
         chipAbout: "Sobre",
+        chipFounder: "Fundador",
         chipTokenomics: "Tokenomics",
         chipFaq: "FAQ",
         chipContact: "Contacto",
@@ -1001,12 +1174,28 @@
 
         aboutTitle: "Sobre o BOTC",
         aboutDesc: "Base limpa e profissional: clareza, mentalidade de segurança e comunidade em primeiro.",
-        f1Title: "Transparência",
-        f1Text: "Comunicação clara, atualizações públicas e foco na confiança — sem confusão.",
-        f2Title: "Mentalidade de segurança",
-        f2Text: "Promovemos boas práticas: nada de seeds, nada de DMs duvidosas, cultura anti-scam.",
-        f3Title: "Visão de longo prazo",
-        f3Text: "Construímos passo a passo: estrutura primeiro, depois crescimento e expansão.",
+        aboutBotcTitle: "O que é o BOTC?",
+        aboutBotcText: "BOTC (Botcoin) é um projeto cripto independente, criado com foco na comunidade, transparência, responsabilidade e visão de longo prazo. Aqui não vendemos sonhos — construímos estrutura.",
+        aboutChip1: "Comunidade primeiro",
+        aboutChip2: "Transparência",
+        aboutChip3: "Longo prazo",
+        aboutValuesTitle: "Valores",
+        val1Title: "Direção",
+        val1Text: "Passos reais, atualizações reais, sem promessas vazias.",
+        val2Title: "Mentalidade de proteção",
+        val2Text: "Cultura anti-scam forte: sem pedidos de seed, sem pressão, sem manipulação.",
+        val3Title: "Respeito",
+        val3Text: "Atuamos com profissionalismo, integridade e respeito pela comunidade.",
+
+        founderTitle: "Fundador",
+        founderDesc: "O lado humano do projeto — feito com responsabilidade e foco a longo prazo.",
+        founderCaption: "Imagem do fundador — visual oficial do projeto BOTC.",
+        bioTitle: "Biografia do fundador",
+        bioText: "O BOTC foi criado por um construtor e entusiasta de blockchain, com forte sentido de responsabilidade e uma visão clara: criar um projeto transparente e respeitoso num espaço muitas vezes dominado por promessas vazias. O foco é longo prazo — estrutura primeiro, comunicação clara e proteção da comunidade como prioridade.",
+        bioNote: "Os detalhes do fundador estão a ser finalizados e serão divulgados numa fase posterior.",
+        bioChip1: "Integridade",
+        bioChip2: "Disciplina",
+        bioChip3: "Proteção da comunidade",
 
         tokTitle: "Tokenomics",
         tokDesc: "Estes valores são exemplos e podes editar depois. O layout já está pronto e profissional.",
@@ -1064,13 +1253,16 @@
 
         footNote: "Usa por tua conta e risco. Isto não é aconselhamento financeiro.",
         footTop: "Voltar ao topo",
+        footFounder: "Fundador",
         footFaq: "FAQ",
         footTok: "Tokenomics"
       },
 
       fr: {
         brandTag: "Projet Botcoin • Communauté d’abord",
+
         navAbout: "À propos",
+        navFounder: "Fondateur",
         navTokenomics: "Tokenomics",
         navRoadmap: "Feuille de route",
         navFaq: "FAQ",
@@ -1086,9 +1278,9 @@
         noticeTitle: "Important :",
         noticeText: "BOTC ne protège ni ne garantit aucune perte financière. La crypto est volatile — participez seulement si vous comprenez les risques.",
 
+        ctaFounder: "Profil du fondateur",
         ctaTokenomics: "Voir tokenomics",
         ctaRoadmap: "Voir la roadmap",
-        ctaContact: "Rejoindre & contact",
         miniNote: "Astuce : utilisez les boutons de langue (EN/PT/FR/DE). Votre choix est sauvegardé.",
 
         sideTitle: "Statut",
@@ -1099,6 +1291,7 @@
         network: "Réseau",
         quickLinks: "Raccourcis",
         chipAbout: "À propos",
+        chipFounder: "Fondateur",
         chipTokenomics: "Tokenomics",
         chipFaq: "FAQ",
         chipContact: "Contact",
@@ -1106,12 +1299,28 @@
 
         aboutTitle: "À propos de BOTC",
         aboutDesc: "Une base propre et professionnelle : clarté, sécurité, communauté d’abord.",
-        f1Title: "Transparence",
-        f1Text: "Communication claire, mises à jour publiques et focus confiance — sans confusion.",
-        f2Title: "Culture sécurité",
-        f2Text: "Bonnes pratiques : pas de seed, pas de DM douteux, culture anti-scam.",
-        f3Title: "Vision long terme",
-        f3Text: "Construire étape par étape : structure d’abord, puis croissance et expansion.",
+        aboutBotcTitle: "Qu’est-ce que BOTC ?",
+        aboutBotcText: "BOTC (Botcoin) est un projet crypto indépendant, pensé “community-first”, axé sur la transparence, la responsabilité et la vision long terme. Nous ne vendons pas des rêves — nous construisons une structure.",
+        aboutChip1: "Communauté d’abord",
+        aboutChip2: "Transparence",
+        aboutChip3: "Long terme",
+        aboutValuesTitle: "Valeurs",
+        val1Title: "Direction",
+        val1Text: "Des étapes réelles, des mises à jour réelles, zéro promesse vide.",
+        val2Title: "Culture protection",
+        val2Text: "Culture anti-scam : pas de demandes de seed, pas de pression.",
+        val3Title: "Respect",
+        val3Text: "Professionnalisme, intégrité et respect de la communauté.",
+
+        founderTitle: "Fondateur",
+        founderDesc: "Le côté humain du projet — responsabilité et vision long terme.",
+        founderCaption: "Portrait du fondateur — image officielle du projet BOTC.",
+        bioTitle: "Biographie du fondateur",
+        bioText: "BOTC a été créé par un builder et passionné de blockchain avec un fort sens des responsabilités et une vision claire : bâtir un projet transparent et respectueux, dans un espace souvent dominé par des promesses vides. L’objectif est long terme — structure d’abord, communication claire, protection de la communauté.",
+        bioNote: "Les informations du fondateur sont en cours de finalisation et seront communiquées à une étape ultérieure.",
+        bioChip1: "Intégrité",
+        bioChip2: "Discipline",
+        bioChip3: "Protection communauté",
 
         tokTitle: "Tokenomics",
         tokDesc: "Valeurs d’exemple modifiables. La mise en page est prête et pro.",
@@ -1169,13 +1378,16 @@
 
         footNote: "Utilisez à vos risques. Ceci n’est pas un conseil financier.",
         footTop: "Haut de page",
+        footFounder: "Fondateur",
         footFaq: "FAQ",
         footTok: "Tokenomics"
       },
 
       de: {
         brandTag: "Botcoin Projekt • Community first",
+
         navAbout: "Über",
+        navFounder: "Gründer",
         navTokenomics: "Tokenomics",
         navRoadmap: "Roadmap",
         navFaq: "FAQ",
@@ -1191,9 +1403,9 @@
         noticeTitle: "Wichtig:",
         noticeText: "BOTC schützt oder garantiert keine finanziellen Verluste. Krypto ist volatil — bitte nur teilnehmen, wenn du die Risiken verstehst.",
 
+        ctaFounder: "Gründerprofil",
         ctaTokenomics: "Tokenomics ansehen",
         ctaRoadmap: "Roadmap ansehen",
-        ctaContact: "Beitreten & Kontakt",
         miniNote: "Tipp: Nutze die Sprachbuttons (EN/PT/FR/DE). Deine Wahl wird gespeichert.",
 
         sideTitle: "Status",
@@ -1204,6 +1416,7 @@
         network: "Netzwerk",
         quickLinks: "Kurzlinks",
         chipAbout: "Über",
+        chipFounder: "Gründer",
         chipTokenomics: "Tokenomics",
         chipFaq: "FAQ",
         chipContact: "Kontakt",
@@ -1211,12 +1424,28 @@
 
         aboutTitle: "Über BOTC",
         aboutDesc: "Saubere, professionelle Basis: Klarheit, Sicherheitsdenken und Community-first.",
-        f1Title: "Transparenz",
-        f1Text: "Klare Kommunikation, öffentliche Updates und Fokus auf Vertrauen — ohne Verwirrung.",
-        f2Title: "Sicherheitsdenken",
-        f2Text: "Sichere Praxis: keine Seed-Weitergabe, keine dubiosen DMs, starke Anti-Scam-Kultur.",
-        f3Title: "Langfristige Vision",
-        f3Text: "Schritt für Schritt: erst Struktur, dann Wachstum und Expansion.",
+        aboutBotcTitle: "Was ist BOTC?",
+        aboutBotcText: "BOTC (Botcoin) ist ein unabhängiges Krypto-Projekt, community-first gedacht, mit Fokus auf Transparenz, Verantwortung und langfristige Vision. Wir verkaufen keine Träume — wir bauen Struktur.",
+        aboutChip1: "Community-first",
+        aboutChip2: "Transparenz",
+        aboutChip3: "Langfristig",
+        aboutValuesTitle: "Werte",
+        val1Title: "Richtung",
+        val1Text: "Echte Schritte, echte Updates, keine leeren Versprechen.",
+        val2Title: "Schutzkultur",
+        val2Text: "Starke Anti-Scam-Kultur: keine Seed-Anfragen, kein Druck.",
+        val3Title: "Respekt",
+        val3Text: "Professionalität, Integrität und Respekt für die Community.",
+
+        founderTitle: "Gründer",
+        founderDesc: "Die menschliche Seite — Verantwortung und langfristiger Fokus.",
+        founderCaption: "Gründerporträt — offizielles BOTC-Projektbild.",
+        bioTitle: "Gründer-Biografie",
+        bioText: "BOTC wurde von einem Builder und Blockchain-Enthusiasten mit starkem Verantwortungsgefühl und klarer Vision gegründet: ein transparentes, respektvolles Projekt in einem Bereich aufzubauen, der oft von leeren Versprechen geprägt ist. Fokus: langfristig — erst Struktur, klare Kommunikation und Schutz der Community.",
+        bioNote: "Gründer-Details werden derzeit finalisiert und zu einem späteren Zeitpunkt veröffentlicht.",
+        bioChip1: "Integrität",
+        bioChip2: "Disziplin",
+        bioChip3: "Community-Schutz",
 
         tokTitle: "Tokenomics",
         tokDesc: "Platzhalterwerte, später editierbar. Layout ist bereit und professionell.",
@@ -1274,6 +1503,7 @@
 
         footNote: "Nutzung auf eigenes Risiko. Keine Finanzberatung.",
         footTop: "Nach oben",
+        footFounder: "Gründer",
         footFaq: "FAQ",
         footTok: "Tokenomics"
       }
@@ -1282,14 +1512,12 @@
     function applyTranslations(lang){
       document.documentElement.lang = lang;
 
-      // Set active button
       ["en","pt","fr","de"].forEach(l=>{
         const b = document.getElementById("lang-"+l);
         if(!b) return;
         b.classList.toggle("active", l === lang);
       });
 
-      // Replace content
       document.querySelectorAll("[data-i18n]").forEach(el=>{
         const key = el.getAttribute("data-i18n");
         const value = (i18n[lang] && i18n[lang][key]) ? i18n[lang][key] : (i18n.en[key] || "");
@@ -1297,7 +1525,6 @@
         el.textContent = value;
       });
 
-      // Update status label if connected
       const isConnected = !!localStorage.getItem("botc_wallet");
       const statusText = document.getElementById("statusText");
       if(statusText){
@@ -1312,7 +1539,7 @@
 
     /* =========================
        WALLET CONNECT (MetaMask)
-       - Simple and safe: only reads address + chainId
+       - reads address + chainId only
        ========================= */
     async function connectWallet(){
       const lang = localStorage.getItem("botc_lang") || "en";
@@ -1339,7 +1566,6 @@
           applyTranslations(lang);
         }
       }catch(err){
-        // User rejected or error
         console.log("connectWallet error:", err);
       }
     }
@@ -1390,7 +1616,6 @@
       }
     }
 
-    // Auto-refresh on account/network changes
     if(window.ethereum){
       window.ethereum.on("accountsChanged", (acc)=>{
         if(acc && acc[0]){
@@ -1408,7 +1633,6 @@
       });
     }
 
-    // Init
     (function init(){
       renderWalletUI();
       const lang = localStorage.getItem("botc_lang") || "en";
