@@ -1,119 +1,1419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BOTC — Botcoin Project</title>
+  <meta name="description" content="BOTC — Botcoin Project. Community-first crypto initiative. Updates, tokenomics, roadmap and resources." />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#050812;
+      --bg1:#071022;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.10);
+      --stroke2: rgba(255,255,255,.16);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,.72);
+      --muted2: rgba(234,240,255,.55);
+      --blue:#3B82F6;
+      --cyan:#22D3EE;
+      --violet:#8B5CF6;
+      --good:#34D399;
+      --warn:#FBBF24;
+      --bad:#FB7185;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 24px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 20% -10%, rgba(59,130,246,.35), transparent 55%),
+        radial-gradient(700px 500px at 85% 10%, rgba(34,211,238,.28), transparent 55%),
+        radial-gradient(800px 600px at 55% 120%, rgba(139,92,246,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    button{ font-family:inherit; }
+
+    /* Subtle animated grid */
+    .bg-grid{
+      position:fixed; inset:0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(closest-side at 50% 10%, rgba(0,0,0,.75), transparent 70%);
+      opacity:.22;
+      pointer-events:none;
+      transform: translateZ(0);
+    }
+
+    .container{
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(6,10,22,.62);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding: 14px 0;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
+    }
+
+    .logo{
+      width:38px; height:38px;
+      border-radius: 12px;
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(34,211,238,.95), rgba(34,211,238,.2) 60%, transparent 62%),
+        radial-gradient(18px 18px at 75% 70%, rgba(59,130,246,.9), rgba(59,130,246,.15) 60%, transparent 62%),
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .brand h1{
+      font-size: 14px;
+      margin:0;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color: rgba(234,240,255,.92);
+      font-weight:800;
+    }
+    .brand p{
+      margin:2px 0 0;
+      font-size:12px;
+      color: var(--muted2);
+    }
+
+    nav .links{
+      display:flex; align-items:center; gap:18px;
+    }
+    nav .links a{
+      font-size:13px;
+      color: var(--muted);
+      padding: 10px 10px;
+      border-radius: 10px;
+      border:1px solid transparent;
+      transition: .18s ease;
+    }
+    nav .links a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+
+    .actions{
+      display:flex; align-items:center; gap:10px;
+      justify-content:flex-end;
+      min-width: 260px;
+    }
+
+    .pill{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+
+    .lang-switch button{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      cursor:pointer;
+      transition:.18s ease;
+      letter-spacing:.03em;
+    }
+    .lang-switch button:hover{ color:var(--text); border-color: rgba(255,255,255,.20); background: rgba(255,255,255,.06); }
+    .lang-switch button.active{
+      color: var(--text);
+      border-color: rgba(59,130,246,.55);
+      background: rgba(59,130,246,.15);
+      box-shadow: 0 0 0 6px rgba(59,130,246,.08);
+    }
+
+    .btn{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      transition:.18s ease;
+      font-weight:700;
+      font-size: 13px;
+      display:inline-flex; align-items:center; gap:10px;
+    }
+    .btn:hover{ border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08); transform: translateY(-1px); }
+    .btn-primary{
+      border-color: rgba(34,211,238,.40);
+      background:
+        radial-gradient(120px 60px at 20% 10%, rgba(34,211,238,.35), transparent 65%),
+        radial-gradient(120px 60px at 80% 90%, rgba(59,130,246,.25), transparent 65%),
+        rgba(59,130,246,.14);
+    }
+    .btn-primary:hover{ border-color: rgba(34,211,238,.62); }
+
+    /* Hero */
+    .hero{
+      padding: 54px 0 18px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .85fr;
+      gap: 20px;
+      align-items:stretch;
+    }
+
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card{
+      padding: 26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(420px 220px at 20% 0%, rgba(34,211,238,.22), transparent 60%),
+        radial-gradient(520px 260px at 70% 30%, rgba(59,130,246,.22), transparent 65%),
+        radial-gradient(520px 260px at 50% 120%, rgba(139,92,246,.18), transparent 65%);
+      opacity:.95;
+      pointer-events:none;
+    }
+    .hero-card > *{ position:relative; }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(234,240,255,.85);
+      font-size: 12px;
+      letter-spacing:.02em;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:99px;
+      background: radial-gradient(circle at 30% 30%, var(--cyan), rgba(34,211,238,.20));
+      box-shadow: 0 0 18px rgba(34,211,238,.55);
+    }
+
+    .hero-title{
+      margin: 14px 0 10px;
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height:1.08;
+      letter-spacing:-.02em;
+      font-weight: 900;
+    }
+    .hero-sub{
+      margin: 0 0 18px;
+      font-size: 15px;
+      line-height:1.65;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    .notice{
+      display:flex;
+      gap:12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border:1px solid rgba(251,191,36,.26);
+      background: rgba(251,191,36,.08);
+      color: rgba(255,255,255,.88);
+      margin: 14px 0 18px;
+    }
+    .notice strong{ color: rgba(255,255,255,.95); }
+    .notice .ic{
+      width:34px; height:34px; border-radius: 12px;
+      background: rgba(251,191,36,.16);
+      border:1px solid rgba(251,191,36,.22);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 900;
+      color: rgba(255,255,255,.92);
+      flex: 0 0 auto;
+    }
+    .notice p{ margin:0; font-size: 12.8px; line-height:1.45; color: rgba(255,255,255,.84); }
+
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 14px;
+      align-items:center;
+    }
+
+    .mini{
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* Side card */
+    .side{
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .side h3{
+      margin: 6px 0 0;
+      font-size: 14px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: rgba(234,240,255,.86);
+    }
+
+    .stat{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 14px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .stat .row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+    }
+    .stat .k{ font-size: 12px; color: var(--muted2); }
+    .stat .v{
+      font-size: 12.5px;
+      color: rgba(234,240,255,.92);
+      font-weight:700;
+      text-align:right;
+      word-break:break-word;
+    }
+    .status-pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .status-dot{
+      width:8px; height:8px; border-radius: 99px;
+      background: rgba(251,113,133,.85);
+      box-shadow: 0 0 14px rgba(251,113,133,.35);
+    }
+    .status-dot.ok{
+      background: rgba(52,211,153,.90);
+      box-shadow: 0 0 14px rgba(52,211,153,.35);
+    }
+
+    .divider{ height:1px; background: rgba(255,255,255,.10); margin: 8px 0; }
+
+    /* Sections */
+    section{
+      padding: 22px 0;
+    }
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin: 10px 0 14px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      color: rgba(234,240,255,.90);
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted2);
+      font-size: 12.8px;
+      max-width: 56ch;
+      line-height:1.45;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .tile{
+      padding: 16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      position:relative;
+      overflow:hidden;
+    }
+    .tile:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(240px 140px at 20% 10%, rgba(34,211,238,.12), transparent 60%),
+        radial-gradient(240px 140px at 80% 90%, rgba(59,130,246,.10), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .tile > *{ position:relative; }
+    .tile h4{ margin: 0 0 6px; font-size: 14px; letter-spacing:.01em; }
+    .tile p{ margin: 0; font-size: 12.8px; line-height:1.55; color: var(--muted); }
+
+    .chips{
+      display:flex; flex-wrap:wrap; gap:8px; margin-top: 10px;
+    }
+    .chip{
+      padding: 7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Tokenomics + Roadmap */
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .item{
+      display:flex;
+      gap:12px;
+      padding: 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .bullet{
+      width:34px; height:34px; border-radius: 14px;
+      border:1px solid rgba(59,130,246,.25);
+      background: rgba(59,130,246,.10);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:900;
+      color: rgba(234,240,255,.90);
+      flex: 0 0 auto;
+    }
+    .item b{ display:block; font-size: 13px; margin-bottom:2px; }
+    .item span{ display:block; font-size: 12.6px; color: var(--muted); line-height:1.45; }
+
+    /* FAQ */
+    details{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    details + details{ margin-top:10px; }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      font-size: 13px;
+      color: rgba(234,240,255,.92);
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12.8px;
+      line-height:1.55;
+    }
+
+    /* Footer */
+    footer{
+      padding: 26px 0 36px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: 16px;
+      color: var(--muted2);
+      font-size: 12px;
+    }
+    .foot{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+    }
+    .foot a{
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .foot a:hover{ color:var(--text); border-color: rgba(255,255,255,.18); }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      nav .links{ display:none; }
+      .actions{ min-width: auto; }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      .two{ grid-template-columns: 1fr; }
+      .brand{ min-width:auto; }
+    }
+
+    @media (max-width: 520px){
+      .hero{ padding-top: 34px; }
+      .hero-card{ padding: 18px; }
+      .side{ padding: 14px; }
+      .btn{ width:100%; justify-content:center; }
+      .pill{ width:100%; justify-content:space-between; }
+      .lang-switch button{ padding: 8px 9px; }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="bg-grid"></div>
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="brand">
-      <span class="brand-dot"></span>
-      <span id="t_brand">BOTC</span>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="BOTC Home">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>BOTC</h1>
+            <p data-i18n="brandTag">Botcoin Project • Community-first</p>
+          </div>
+        </a>
+
+        <nav class="links" aria-label="Primary">
+          <a href="#about" data-i18n="navAbout">About</a>
+          <a href="#tokenomics" data-i18n="navTokenomics">Tokenomics</a>
+          <a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
+          <a href="#faq" data-i18n="navFaq">FAQ</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
+        </nav>
+
+        <div class="actions">
+          <div class="pill" aria-label="Language switcher">
+            <div class="lang-switch">
+              <button id="lang-en" onclick="setLang('en')">EN</button>
+              <button id="lang-pt" onclick="setLang('pt')">PT</button>
+              <button id="lang-fr" onclick="setLang('fr')">FR</button>
+              <button id="lang-de" onclick="setLang('de')">DE</button>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="btnConnect" onclick="connectWallet()">
+            <span aria-hidden="true">🦊</span>
+            <span data-i18n="btnConnect">Connect wallet</span>
+          </button>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <nav class="nav">
-      <a href="#about" id="t_nav_about">About</a>
-      <a href="#tokenomics" id="t_nav_tokenomics">Tokenomics</a>
-      <a href="#presale" id="t_nav_presale">Presale</a>
-      <a href="#roadmap" id="t_nav_roadmap">Roadmap</a>
-      <a href="#faq" id="t_nav_faq">FAQ</a>
-    </nav>
-
-    <div class="lang-switch">
-      <button onclick="setLang('en')">EN</button>
-      <button onclick="setLang('pt')">PT</button>
-      <button onclick="setLang('fr')">FR</button>
-      <button onclick="setLang('de')">DE</button>
-    </div>
-  </div>
-
-  <!-- Main content -->
-  <main class="container">
-
+  <main id="top" class="container">
+    <!-- HERO -->
     <section class="hero">
-      <h1 id="t_title">BOTC — Botcoin Project</h1>
-      <p class="subtitle" id="t_subtitle">
-        A community-driven crypto project built with responsibility, transparency, and long-term vision.
-      </p>
+      <div class="hero-grid">
+        <div class="card hero-card">
+          <div class="badge">
+            <span class="dot" aria-hidden="true"></span>
+            <span data-i18n="badgeLive">Official BOTC project page</span>
+          </div>
 
-      <div class="cta-row">
-        <a class="btn primary" href="#tokenomics" id="t_cta_tokenomics">View Tokenomics</a>
-        <a class="btn" href="#presale" id="t_cta_presale">Presale Info</a>
-        <a class="btn" href="#faq" id="t_cta_faq">Read FAQ</a>
+          <h2 class="hero-title" data-i18n="heroTitle">
+            Build with trust. Move with the community.
+          </h2>
+
+          <p class="hero-sub" data-i18n="heroSub">
+            BOTC is a community-driven crypto initiative focused on transparency, resilience, and long-term vision.
+          </p>
+
+          <!-- IMPORTANT DISCLAIMER (as you asked: right at the top) -->
+          <div class="notice" role="note" aria-label="Important notice">
+            <div class="ic" aria-hidden="true">!</div>
+            <p>
+              <strong data-i18n="noticeTitle">Important:</strong>
+              <span data-i18n="noticeText">
+                BOTC does not protect or guarantee any financial losses. Crypto is volatile — participate only if you understand the risks.
+              </span>
+            </p>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn" href="#tokenomics">
+              <span aria-hidden="true">📊</span>
+              <span data-i18n="ctaTokenomics">View tokenomics</span>
+            </a>
+            <a class="btn" href="#roadmap">
+              <span aria-hidden="true">🧭</span>
+              <span data-i18n="ctaRoadmap">Explore roadmap</span>
+            </a>
+            <a class="btn" href="#contact">
+              <span aria-hidden="true">🤝</span>
+              <span data-i18n="ctaContact">Join & contact</span>
+            </a>
+          </div>
+
+          <div class="mini" data-i18n="miniNote">
+            Tip: Use the language buttons (EN/PT/FR/DE). Your choice is saved automatically.
+          </div>
+        </div>
+
+        <aside class="card side" aria-label="Wallet status and quick info">
+          <h3 data-i18n="sideTitle">Status</h3>
+
+          <div class="stat">
+            <div class="row">
+              <div class="k" data-i18n="walletStatus">Wallet</div>
+              <div class="v">
+                <span class="status-pill">
+                  <span id="statusDot" class="status-dot" aria-hidden="true"></span>
+                  <span id="statusText" data-i18n="statusNotConnected">Not connected</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row">
+              <div class="k" data-i18n="walletAddress">Address</div>
+              <div class="v" id="addrText">—</div>
+            </div>
+
+            <div class="row">
+              <div class="k" data-i18n="network">Network</div>
+              <div class="v" id="netText">—</div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="row">
+              <div class="k" data-i18n="quickLinks">Quick links</div>
+              <div class="v">BOTC</div>
+            </div>
+            <div class="chips">
+              <a class="chip" href="#about" data-i18n="chipAbout">About</a>
+              <a class="chip" href="#tokenomics" data-i18n="chipTokenomics">Tokenomics</a>
+              <a class="chip" href="#faq" data-i18n="chipFaq">FAQ</a>
+              <a class="chip" href="#contact" data-i18n="chipContact">Contact</a>
+            </div>
+          </div>
+
+          <button class="btn" onclick="disconnectWallet()" id="btnDisconnect" style="display:none;">
+            <span aria-hidden="true">⛔</span>
+            <span data-i18n="btnDisconnect">Disconnect</span>
+          </button>
+
+          <div class="mini" data-i18n="sideNote">
+            Never share your seed phrase. Not with anyone. Not even “support”.
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="grid">
-
-      <div class="card" id="about">
-        <h2 id="t_about_title">What is BOTC?</h2>
-        <p id="t_about_text">
-          BOTC is a community-driven crypto project focused on transparency, ethics, and long-term building.
-        </p>
+    <!-- ABOUT / FEATURES -->
+    <section id="about">
+      <div class="section-title">
+        <h2 data-i18n="aboutTitle">About BOTC</h2>
+        <p data-i18n="aboutDesc">A clean, professional foundation: clarity, security mindset, and a community-first approach.</p>
       </div>
 
-      <div class="card" id="tokenomics">
-        <h2 id="t_tok_title">Tokenomics</h2>
-        <p id="t_tok_text">
-          Supply, distribution, and ecosystem rules will be published with full clarity and public updates.
-        </p>
+      <div class="grid3">
+        <div class="tile">
+          <h4 data-i18n="f1Title">Transparency</h4>
+          <p data-i18n="f1Text">Clear communication, public updates, and a focus on trust — no confusion, no hidden talk.</p>
+        </div>
+        <div class="tile">
+          <h4 data-i18n="f2Title">Security mindset</h4>
+          <p data-i18n="f2Text">We promote safe practices: no seed sharing, no shady DMs, and strong anti-scam culture.</p>
+        </div>
+        <div class="tile">
+          <h4 data-i18n="f3Title">Long-term vision</h4>
+          <p data-i18n="f3Text">We build step-by-step: structure first, then growth, partnerships, and expansion.</p>
+        </div>
       </div>
-
-      <div class="card" id="presale">
-        <h2 id="t_pre_title">Presale</h2>
-        <p id="t_pre_text">
-          Presale details will be shared only through official channels. Never share your seed phrase.
-        </p>
-      </div>
-
-      <div class="card" id="roadmap">
-        <h2 id="t_road_title">Roadmap</h2>
-        <p id="t_road_text">
-          Step-by-step development: infrastructure, security, transparency, then product expansion.
-        </p>
-      </div>
-
-      <div class="card" id="faq">
-        <h2 id="t_faq_title">FAQ</h2>
-        <p id="t_faq_text">
-          We publish updates clearly. No unrealistic promises. No guarantees. Use at your own risk.
-        </p>
-      </div>
-
-      <div class="card">
-        <h2 id="t_security_title">Security</h2>
-        <p id="t_security_text">
-          Never share your seed phrase. BOTC team will never ask for it. Beware of impersonators.
-        </p>
-      </div>
-
     </section>
 
-    <section class="notice">
-      <h2 id="t_noticeTitle">Important Notice</h2>
-      <p id="t_noticeP1">
-        Cryptocurrency involves risk. BOTC does not guarantee profits, returns, or financial gains of any kind.
-      </p>
-      <p id="t_noticeP2">
-        Nothing on this website constitutes financial advice.
-      </p>
+    <!-- TOKENOMICS + ROADMAP -->
+    <section id="tokenomics">
+      <div class="section-title">
+        <h2 data-i18n="tokTitle">Tokenomics</h2>
+        <p data-i18n="tokDesc">These values are placeholders you can edit later. The layout is ready and professional.</p>
+      </div>
+
+      <div class="two">
+        <div class="tile">
+          <h4 data-i18n="tokCardTitle">Core numbers</h4>
+          <div class="list">
+            <div class="item">
+              <div class="bullet">Σ</div>
+              <div>
+                <b data-i18n="tokSupplyLabel">Total supply</b>
+                <span data-i18n="tokSupplyValue">500,000,000 BOTC (example)</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="bullet">%</div>
+              <div>
+                <b data-i18n="tokTaxLabel">Buy/Sell tax</b>
+                <span data-i18n="tokTaxValue">1.5% (example) — adjustable</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="bullet">🔥</div>
+              <div>
+                <b data-i18n="tokBurnLabel">Deflation</b>
+                <span data-i18n="tokBurnValue">Burn mechanism (example) — details coming</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile">
+          <h4 data-i18n="tokCard2Title">Utility & principles</h4>
+          <div class="list">
+            <div class="item">
+              <div class="bullet">🧠</div>
+              <div>
+                <b data-i18n="tokU1Title">Community utility</b>
+                <span data-i18n="tokU1Text">A token should serve the ecosystem — not just hype.</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="bullet">🛡️</div>
+              <div>
+                <b data-i18n="tokU2Title">Anti-scam culture</b>
+                <span data-i18n="tokU2Text">No fake support. No asking for funds. No seed phrase requests.</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="bullet">📣</div>
+              <div>
+                <b data-i18n="tokU3Title">Updates</b>
+                <span data-i18n="tokU3Text">We publish clear announcements when changes are made.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <footer class="footer">
-      <span id="t_footer">© 2025 BOTC Project — All rights reserved.</span>
-      <span>
-        <a href="legal/terms.html" id="t_terms">Terms</a> ·
-        <a href="legal/privacy.html" id="t_privacy">Privacy</a>
-      </span>
-    </footer>
+    <section id="roadmap">
+      <div class="section-title">
+        <h2 data-i18n="roadTitle">Roadmap</h2>
+        <p data-i18n="roadDesc">Simple, readable steps. We keep it realistic and clean.</p>
+      </div>
 
+      <div class="grid3">
+        <div class="tile">
+          <h4 data-i18n="r1Title">Phase 1 — Foundation</h4>
+          <p data-i18n="r1Text">Website structure, policies, multilingual setup, and community channels.</p>
+          <div class="chips">
+            <span class="chip" data-i18n="r1c1">Site v2</span>
+            <span class="chip" data-i18n="r1c2">Translations</span>
+            <span class="chip" data-i18n="r1c3">Safety rules</span>
+          </div>
+        </div>
+        <div class="tile">
+          <h4 data-i18n="r2Title">Phase 2 — Growth</h4>
+          <p data-i18n="r2Text">Brand consistency, listings preparation, and community moderation.</p>
+          <div class="chips">
+            <span class="chip" data-i18n="r2c1">Social content</span>
+            <span class="chip" data-i18n="r2c2">Partnership filter</span>
+            <span class="chip" data-i18n="r2c3">Transparency</span>
+          </div>
+        </div>
+        <div class="tile">
+          <h4 data-i18n="r3Title">Phase 3 — Expansion</h4>
+          <p data-i18n="r3Text">Utility releases, ecosystem extensions, and long-term consolidation.</p>
+          <div class="chips">
+            <span class="chip" data-i18n="r3c1">Ecosystem</span>
+            <span class="chip" data-i18n="r3c2">Tools</span>
+            <span class="chip" data-i18n="r3c3">Community</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="section-title">
+        <h2 data-i18n="faqTitle">FAQ</h2>
+        <p data-i18n="faqDesc">Short and direct answers — no confusion.</p>
+      </div>
+
+      <details>
+        <summary data-i18n="q1">Is BOTC a guarantee of profit?</summary>
+        <p data-i18n="a1">No. BOTC does not guarantee profits and does not protect any financial losses. Crypto markets are volatile.</p>
+      </details>
+
+      <details>
+        <summary data-i18n="q2">Will someone from BOTC ask for my seed phrase?</summary>
+        <p data-i18n="a2">Never. No legitimate team member will ask for your seed phrase, private keys, or remote access.</p>
+      </details>
+
+      <details>
+        <summary data-i18n="q3">Why connect a wallet?</summary>
+        <p data-i18n="a3">Wallet connection can enable future features (dashboard, gated content). This page only shows your address status.</p>
+      </details>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">
+        <h2 data-i18n="contactTitle">Contact</h2>
+        <p data-i18n="contactDesc">Put your official links here (X / Telegram / Website). Keep everything transparent.</p>
+      </div>
+
+      <div class="two">
+        <div class="tile">
+          <h4 data-i18n="contactCard1Title">Official channels</h4>
+          <p data-i18n="contactCard1Text">Add your real links and keep them consistent across all platforms.</p>
+          <div class="chips">
+            <span class="chip">X/Twitter</span>
+            <span class="chip">Telegram</span>
+            <span class="chip">Website</span>
+          </div>
+        </div>
+
+        <div class="tile">
+          <h4 data-i18n="contactCard2Title">Partnership policy</h4>
+          <p data-i18n="contactCard2Text">We do not accept shady DMs. We only evaluate proposals transparently and professionally.</p>
+          <div class="chips">
+            <span class="chip" data-i18n="policyChip1">No seed requests</span>
+            <span class="chip" data-i18n="policyChip2">No pressure tactics</span>
+            <span class="chip" data-i18n="policyChip3">Verify first</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- JS sempre no fim -->
-  <script src="js/lang.js"></script>
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div style="font-weight:800; letter-spacing:.08em; text-transform:uppercase; color: rgba(234,240,255,.85);">BOTC</div>
+          <div data-i18n="footNote">Use at your own risk. This is not financial advice.</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+          <a href="#top" data-i18n="footTop">Back to top</a>
+          <a href="#faq" data-i18n="footFaq">FAQ</a>
+          <a href="#tokenomics" data-i18n="footTok">Tokenomics</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
+  <script>
+    /* =========================
+       TRANSLATIONS
+       ========================= */
+    const i18n = {
+      en: {
+        brandTag: "Botcoin Project • Community-first",
+        navAbout: "About",
+        navTokenomics: "Tokenomics",
+        navRoadmap: "Roadmap",
+        navFaq: "FAQ",
+        navContact: "Contact",
+
+        btnConnect: "Connect wallet",
+        btnDisconnect: "Disconnect",
+
+        badgeLive: "Official BOTC project page",
+        heroTitle: "Build with trust. Move with the community.",
+        heroSub: "BOTC is a community-driven crypto initiative focused on transparency, resilience, and long-term vision.",
+
+        noticeTitle: "Important:",
+        noticeText: "BOTC does not protect or guarantee any financial losses. Crypto is volatile — participate only if you understand the risks.",
+
+        ctaTokenomics: "View tokenomics",
+        ctaRoadmap: "Explore roadmap",
+        ctaContact: "Join & contact",
+        miniNote: "Tip: Use the language buttons (EN/PT/FR/DE). Your choice is saved automatically.",
+
+        sideTitle: "Status",
+        walletStatus: "Wallet",
+        statusNotConnected: "Not connected",
+        statusConnected: "Connected",
+        walletAddress: "Address",
+        network: "Network",
+        quickLinks: "Quick links",
+        chipAbout: "About",
+        chipTokenomics: "Tokenomics",
+        chipFaq: "FAQ",
+        chipContact: "Contact",
+        sideNote: "Never share your seed phrase. Not with anyone. Not even “support”.",
+
+        aboutTitle: "About BOTC",
+        aboutDesc: "A clean, professional foundation: clarity, security mindset, and a community-first approach.",
+        f1Title: "Transparency",
+        f1Text: "Clear communication, public updates, and a focus on trust — no confusion, no hidden talk.",
+        f2Title: "Security mindset",
+        f2Text: "We promote safe practices: no seed sharing, no shady DMs, and strong anti-scam culture.",
+        f3Title: "Long-term vision",
+        f3Text: "We build step-by-step: structure first, then growth, partnerships, and expansion.",
+
+        tokTitle: "Tokenomics",
+        tokDesc: "These values are placeholders you can edit later. The layout is ready and professional.",
+        tokCardTitle: "Core numbers",
+        tokSupplyLabel: "Total supply",
+        tokSupplyValue: "500,000,000 BOTC (example)",
+        tokTaxLabel: "Buy/Sell tax",
+        tokTaxValue: "1.5% (example) — adjustable",
+        tokBurnLabel: "Deflation",
+        tokBurnValue: "Burn mechanism (example) — details coming",
+        tokCard2Title: "Utility & principles",
+        tokU1Title: "Community utility",
+        tokU1Text: "A token should serve the ecosystem — not just hype.",
+        tokU2Title: "Anti-scam culture",
+        tokU2Text: "No fake support. No asking for funds. No seed phrase requests.",
+        tokU3Title: "Updates",
+        tokU3Text: "We publish clear announcements when changes are made.",
+
+        roadTitle: "Roadmap",
+        roadDesc: "Simple, readable steps. We keep it realistic and clean.",
+        r1Title: "Phase 1 — Foundation",
+        r1Text: "Website structure, policies, multilingual setup, and community channels.",
+        r1c1: "Site v2",
+        r1c2: "Translations",
+        r1c3: "Safety rules",
+        r2Title: "Phase 2 — Growth",
+        r2Text: "Brand consistency, listings preparation, and community moderation.",
+        r2c1: "Social content",
+        r2c2: "Partnership filter",
+        r2c3: "Transparency",
+        r3Title: "Phase 3 — Expansion",
+        r3Text: "Utility releases, ecosystem extensions, and long-term consolidation.",
+        r3c1: "Ecosystem",
+        r3c2: "Tools",
+        r3c3: "Community",
+
+        faqTitle: "FAQ",
+        faqDesc: "Short and direct answers — no confusion.",
+        q1: "Is BOTC a guarantee of profit?",
+        a1: "No. BOTC does not guarantee profits and does not protect any financial losses. Crypto markets are volatile.",
+        q2: "Will someone from BOTC ask for my seed phrase?",
+        a2: "Never. No legitimate team member will ask for your seed phrase, private keys, or remote access.",
+        q3: "Why connect a wallet?",
+        a3: "Wallet connection can enable future features (dashboard, gated content). This page only shows your address status.",
+
+        contactTitle: "Contact",
+        contactDesc: "Put your official links here (X / Telegram / Website). Keep everything transparent.",
+        contactCard1Title: "Official channels",
+        contactCard1Text: "Add your real links and keep them consistent across all platforms.",
+        contactCard2Title: "Partnership policy",
+        contactCard2Text: "We do not accept shady DMs. We only evaluate proposals transparently and professionally.",
+        policyChip1: "No seed requests",
+        policyChip2: "No pressure tactics",
+        policyChip3: "Verify first",
+
+        footNote: "Use at your own risk. This is not financial advice.",
+        footTop: "Back to top",
+        footFaq: "FAQ",
+        footTok: "Tokenomics"
+      },
+
+      pt: {
+        brandTag: "Projeto Botcoin • Comunidade em primeiro",
+        navAbout: "Sobre",
+        navTokenomics: "Tokenomics",
+        navRoadmap: "Roadmap",
+        navFaq: "FAQ",
+        navContact: "Contacto",
+
+        btnConnect: "Ligar carteira",
+        btnDisconnect: "Desligar",
+
+        badgeLive: "Página oficial do projeto BOTC",
+        heroTitle: "Constrói com confiança. Avança com a comunidade.",
+        heroSub: "BOTC é uma iniciativa cripto orientada pela comunidade, com foco em transparência, resiliência e visão de longo prazo.",
+
+        noticeTitle: "Importante:",
+        noticeText: "O BOTC não protege nem garante quaisquer perdas financeiras. Cripto é volátil — participa apenas se compreendes os riscos.",
+
+        ctaTokenomics: "Ver tokenomics",
+        ctaRoadmap: "Explorar roadmap",
+        ctaContact: "Entrar & contacto",
+        miniNote: "Dica: Usa os botões de idioma (EN/PT/FR/DE). A tua escolha fica guardada.",
+
+        sideTitle: "Estado",
+        walletStatus: "Carteira",
+        statusNotConnected: "Não ligada",
+        statusConnected: "Ligada",
+        walletAddress: "Endereço",
+        network: "Rede",
+        quickLinks: "Atalhos",
+        chipAbout: "Sobre",
+        chipTokenomics: "Tokenomics",
+        chipFaq: "FAQ",
+        chipContact: "Contacto",
+        sideNote: "Nunca partilhes a tua seed phrase. Com ninguém. Nem com “suporte”.",
+
+        aboutTitle: "Sobre o BOTC",
+        aboutDesc: "Base limpa e profissional: clareza, mentalidade de segurança e comunidade em primeiro.",
+        f1Title: "Transparência",
+        f1Text: "Comunicação clara, atualizações públicas e foco na confiança — sem confusão.",
+        f2Title: "Mentalidade de segurança",
+        f2Text: "Promovemos boas práticas: nada de seeds, nada de DMs duvidosas, cultura anti-scam.",
+        f3Title: "Visão de longo prazo",
+        f3Text: "Construímos passo a passo: estrutura primeiro, depois crescimento e expansão.",
+
+        tokTitle: "Tokenomics",
+        tokDesc: "Estes valores são exemplos e podes editar depois. O layout já está pronto e profissional.",
+        tokCardTitle: "Números-base",
+        tokSupplyLabel: "Supply total",
+        tokSupplyValue: "500.000.000 BOTC (exemplo)",
+        tokTaxLabel: "Taxa compra/venda",
+        tokTaxValue: "1,5% (exemplo) — ajustável",
+        tokBurnLabel: "Deflação",
+        tokBurnValue: "Mecanismo de burn (exemplo) — detalhes em breve",
+        tokCard2Title: "Utilidade & princípios",
+        tokU1Title: "Utilidade comunitária",
+        tokU1Text: "Um token deve servir o ecossistema — não só hype.",
+        tokU2Title: "Cultura anti-scam",
+        tokU2Text: "Nada de suporte falso. Nada de pedir fundos. Nada de pedir seed phrase.",
+        tokU3Title: "Atualizações",
+        tokU3Text: "Publicamos comunicados claros quando há alterações.",
+
+        roadTitle: "Roadmap",
+        roadDesc: "Passos simples e realistas. Limpo e direto.",
+        r1Title: "Fase 1 — Fundação",
+        r1Text: "Estrutura do site, políticas, idiomas e canais da comunidade.",
+        r1c1: "Site v2",
+        r1c2: "Traduções",
+        r1c3: "Regras de segurança",
+        r2Title: "Fase 2 — Crescimento",
+        r2Text: "Consistência da marca, preparação de listings e moderação.",
+        r2c1: "Conteúdo social",
+        r2c2: "Filtro de parcerias",
+        r2c3: "Transparência",
+        r3Title: "Fase 3 — Expansão",
+        r3Text: "Lançar utilidades, expandir ecossistema e consolidar a longo prazo.",
+        r3c1: "Ecossistema",
+        r3c2: "Ferramentas",
+        r3c3: "Comunidade",
+
+        faqTitle: "FAQ",
+        faqDesc: "Respostas curtas e diretas — sem confusão.",
+        q1: "O BOTC garante lucro?",
+        a1: "Não. O BOTC não garante lucros e não protege quaisquer perdas financeiras. O mercado cripto é volátil.",
+        q2: "Alguém do BOTC vai pedir a minha seed phrase?",
+        a2: "Nunca. Nenhum membro legítimo pede seed phrase, chaves privadas ou acesso remoto.",
+        q3: "Porquê ligar a carteira?",
+        a3: "A ligação pode ativar funções futuras (dashboard, áreas restritas). Aqui só mostramos o estado e o endereço.",
+
+        contactTitle: "Contacto",
+        contactDesc: "Coloca aqui os teus links oficiais (X / Telegram / Website). Mantém tudo transparente.",
+        contactCard1Title: "Canais oficiais",
+        contactCard1Text: "Adiciona os links reais e mantém consistência em todas as plataformas.",
+        contactCard2Title: "Política de parcerias",
+        contactCard2Text: "Não aceitamos DMs suspeitas. Avaliamos propostas com transparência e profissionalismo.",
+        policyChip1: "Sem pedidos de seed",
+        policyChip2: "Sem pressão",
+        policyChip3: "Verificar primeiro",
+
+        footNote: "Usa por tua conta e risco. Isto não é aconselhamento financeiro.",
+        footTop: "Voltar ao topo",
+        footFaq: "FAQ",
+        footTok: "Tokenomics"
+      },
+
+      fr: {
+        brandTag: "Projet Botcoin • Communauté d’abord",
+        navAbout: "À propos",
+        navTokenomics: "Tokenomics",
+        navRoadmap: "Feuille de route",
+        navFaq: "FAQ",
+        navContact: "Contact",
+
+        btnConnect: "Connecter wallet",
+        btnDisconnect: "Déconnecter",
+
+        badgeLive: "Page officielle du projet BOTC",
+        heroTitle: "Construire avec confiance. Avancer avec la communauté.",
+        heroSub: "BOTC est une initiative crypto portée par la communauté, axée sur la transparence, la résilience et une vision long terme.",
+
+        noticeTitle: "Important :",
+        noticeText: "BOTC ne protège ni ne garantit aucune perte financière. La crypto est volatile — participez seulement si vous comprenez les risques.",
+
+        ctaTokenomics: "Voir tokenomics",
+        ctaRoadmap: "Voir la roadmap",
+        ctaContact: "Rejoindre & contact",
+        miniNote: "Astuce : utilisez les boutons de langue (EN/PT/FR/DE). Votre choix est sauvegardé.",
+
+        sideTitle: "Statut",
+        walletStatus: "Wallet",
+        statusNotConnected: "Non connecté",
+        statusConnected: "Connecté",
+        walletAddress: "Adresse",
+        network: "Réseau",
+        quickLinks: "Raccourcis",
+        chipAbout: "À propos",
+        chipTokenomics: "Tokenomics",
+        chipFaq: "FAQ",
+        chipContact: "Contact",
+        sideNote: "Ne partagez jamais votre seed phrase. Avec personne. Pas même le “support”.",
+
+        aboutTitle: "À propos de BOTC",
+        aboutDesc: "Une base propre et professionnelle : clarté, sécurité, communauté d’abord.",
+        f1Title: "Transparence",
+        f1Text: "Communication claire, mises à jour publiques et focus confiance — sans confusion.",
+        f2Title: "Culture sécurité",
+        f2Text: "Bonnes pratiques : pas de seed, pas de DM douteux, culture anti-scam.",
+        f3Title: "Vision long terme",
+        f3Text: "Construire étape par étape : structure d’abord, puis croissance et expansion.",
+
+        tokTitle: "Tokenomics",
+        tokDesc: "Valeurs d’exemple modifiables. La mise en page est prête et pro.",
+        tokCardTitle: "Chiffres clés",
+        tokSupplyLabel: "Supply total",
+        tokSupplyValue: "500 000 000 BOTC (exemple)",
+        tokTaxLabel: "Taxe achat/vente",
+        tokTaxValue: "1,5% (exemple) — ajustable",
+        tokBurnLabel: "Déflation",
+        tokBurnValue: "Mécanisme de burn (exemple) — détails à venir",
+        tokCard2Title: "Utilité & principes",
+        tokU1Title: "Utilité communauté",
+        tokU1Text: "Un token doit servir l’écosystème — pas seulement le hype.",
+        tokU2Title: "Anti-scam",
+        tokU2Text: "Pas de faux support. Pas de demande de fonds. Pas de demande de seed.",
+        tokU3Title: "Annonces",
+        tokU3Text: "Nous publions des annonces claires lors des changements.",
+
+        roadTitle: "Feuille de route",
+        roadDesc: "Étapes simples et réalistes. Clair et direct.",
+        r1Title: "Phase 1 — Fondation",
+        r1Text: "Structure du site, politiques, langues, et canaux communauté.",
+        r1c1: "Site v2",
+        r1c2: "Traductions",
+        r1c3: "Règles sécurité",
+        r2Title: "Phase 2 — Croissance",
+        r2Text: "Cohérence de marque, préparation listings, modération communauté.",
+        r2c1: "Contenu social",
+        r2c2: "Filtre partenariats",
+        r2c3: "Transparence",
+        r3Title: "Phase 3 — Expansion",
+        r3Text: "Utilités, extension de l’écosystème, consolidation long terme.",
+        r3c1: "Écosystème",
+        r3c2: "Outils",
+        r3c3: "Communauté",
+
+        faqTitle: "FAQ",
+        faqDesc: "Réponses courtes — sans confusion.",
+        q1: "BOTC garantit-il un profit ?",
+        a1: "Non. BOTC ne garantit aucun profit et ne protège aucune perte financière. La crypto est volatile.",
+        q2: "Quelqu’un de BOTC demandera-t-il ma seed phrase ?",
+        a2: "Jamais. Aucun membre légitime ne demandera seed phrase, clés privées ou accès à distance.",
+        q3: "Pourquoi connecter un wallet ?",
+        a3: "La connexion peut servir à des fonctions futures (dashboard, accès). Ici, on affiche seulement le statut.",
+
+        contactTitle: "Contact",
+        contactDesc: "Ajoutez vos liens officiels (X / Telegram / Website). Gardez tout transparent.",
+        contactCard1Title: "Canaux officiels",
+        contactCard1Text: "Ajoutez les vrais liens et gardez la cohérence partout.",
+        contactCard2Title: "Politique partenariats",
+        contactCard2Text: "Pas de DMs suspects. Nous évaluons les propositions avec transparence et professionnalisme.",
+        policyChip1: "Pas de seed",
+        policyChip2: "Pas de pression",
+        policyChip3: "Vérifier d’abord",
+
+        footNote: "Utilisez à vos risques. Ceci n’est pas un conseil financier.",
+        footTop: "Haut de page",
+        footFaq: "FAQ",
+        footTok: "Tokenomics"
+      },
+
+      de: {
+        brandTag: "Botcoin Projekt • Community first",
+        navAbout: "Über",
+        navTokenomics: "Tokenomics",
+        navRoadmap: "Roadmap",
+        navFaq: "FAQ",
+        navContact: "Kontakt",
+
+        btnConnect: "Wallet verbinden",
+        btnDisconnect: "Trennen",
+
+        badgeLive: "Offizielle BOTC Projektseite",
+        heroTitle: "Mit Vertrauen bauen. Mit der Community bewegen.",
+        heroSub: "BOTC ist eine community-getriebene Krypto-Initiative mit Fokus auf Transparenz, Stabilität und langfristige Vision.",
+
+        noticeTitle: "Wichtig:",
+        noticeText: "BOTC schützt oder garantiert keine finanziellen Verluste. Krypto ist volatil — bitte nur teilnehmen, wenn du die Risiken verstehst.",
+
+        ctaTokenomics: "Tokenomics ansehen",
+        ctaRoadmap: "Roadmap ansehen",
+        ctaContact: "Beitreten & Kontakt",
+        miniNote: "Tipp: Nutze die Sprachbuttons (EN/PT/FR/DE). Deine Wahl wird gespeichert.",
+
+        sideTitle: "Status",
+        walletStatus: "Wallet",
+        statusNotConnected: "Nicht verbunden",
+        statusConnected: "Verbunden",
+        walletAddress: "Adresse",
+        network: "Netzwerk",
+        quickLinks: "Kurzlinks",
+        chipAbout: "Über",
+        chipTokenomics: "Tokenomics",
+        chipFaq: "FAQ",
+        chipContact: "Kontakt",
+        sideNote: "Gib niemals deine Seed-Phrase weiter. Niemandem. Nicht einmal „Support“.",
+
+        aboutTitle: "Über BOTC",
+        aboutDesc: "Saubere, professionelle Basis: Klarheit, Sicherheitsdenken und Community-first.",
+        f1Title: "Transparenz",
+        f1Text: "Klare Kommunikation, öffentliche Updates und Fokus auf Vertrauen — ohne Verwirrung.",
+        f2Title: "Sicherheitsdenken",
+        f2Text: "Sichere Praxis: keine Seed-Weitergabe, keine dubiosen DMs, starke Anti-Scam-Kultur.",
+        f3Title: "Langfristige Vision",
+        f3Text: "Schritt für Schritt: erst Struktur, dann Wachstum und Expansion.",
+
+        tokTitle: "Tokenomics",
+        tokDesc: "Platzhalterwerte, später editierbar. Layout ist bereit und professionell.",
+        tokCardTitle: "Kernzahlen",
+        tokSupplyLabel: "Gesamtmenge",
+        tokSupplyValue: "500.000.000 BOTC (Beispiel)",
+        tokTaxLabel: "Buy/Sell Steuer",
+        tokTaxValue: "1,5% (Beispiel) — anpassbar",
+        tokBurnLabel: "Deflation",
+        tokBurnValue: "Burn-Mechanismus (Beispiel) — Details folgen",
+        tokCard2Title: "Nutzen & Prinzipien",
+        tokU1Title: "Community-Nutzen",
+        tokU1Text: "Ein Token soll dem Ökosystem dienen — nicht nur Hype.",
+        tokU2Title: "Anti-Scam",
+        tokU2Text: "Kein Fake-Support. Keine Geldforderungen. Keine Seed-Anfragen.",
+        tokU3Title: "Updates",
+        tokU3Text: "Klare Ankündigungen bei Änderungen.",
+
+        roadTitle: "Roadmap",
+        roadDesc: "Einfach, realistisch, sauber.",
+        r1Title: "Phase 1 — Fundament",
+        r1Text: "Website-Struktur, Policies, Sprachen und Community-Kanäle.",
+        r1c1: "Site v2",
+        r1c2: "Übersetzungen",
+        r1c3: "Sicherheitsregeln",
+        r2Title: "Phase 2 — Wachstum",
+        r2Text: "Brand-Konsistenz, Listing-Vorbereitung und Moderation.",
+        r2c1: "Social Content",
+        r2c2: "Partner-Filter",
+        r2c3: "Transparenz",
+        r3Title: "Phase 3 — Expansion",
+        r3Text: "Utilities, Ökosystem-Erweiterung und langfristige Konsolidierung.",
+        r3c1: "Ökosystem",
+        r3c2: "Tools",
+        r3c3: "Community",
+
+        faqTitle: "FAQ",
+        faqDesc: "Kurz & klar — ohne Verwirrung.",
+        q1: "Garantiert BOTC Gewinn?",
+        a1: "Nein. BOTC garantiert keinen Gewinn und schützt keine finanziellen Verluste. Krypto ist volatil.",
+        q2: "Fragt BOTC nach meiner Seed-Phrase?",
+        a2: "Niemals. Kein legitimes Teammitglied fragt nach Seed, Private Keys oder Remote-Zugriff.",
+        q3: "Warum Wallet verbinden?",
+        a3: "Für mögliche spätere Funktionen (Dashboard, Zugang). Hier wird nur der Status angezeigt.",
+
+        contactTitle: "Kontakt",
+        contactDesc: "Füge hier deine offiziellen Links ein (X / Telegram / Website). Alles transparent halten.",
+        contactCard1Title: "Offizielle Kanäle",
+        contactCard1Text: "Echte Links eintragen und überall konsistent bleiben.",
+        contactCard2Title: "Partnerschafts-Policy",
+        contactCard2Text: "Keine dubiosen DMs. Wir prüfen Vorschläge transparent und professionell.",
+        policyChip1: "Keine Seed-Anfragen",
+        policyChip2: "Kein Druck",
+        policyChip3: "Erst prüfen",
+
+        footNote: "Nutzung auf eigenes Risiko. Keine Finanzberatung.",
+        footTop: "Nach oben",
+        footFaq: "FAQ",
+        footTok: "Tokenomics"
+      }
+    };
+
+    function applyTranslations(lang){
+      document.documentElement.lang = lang;
+
+      // Set active button
+      ["en","pt","fr","de"].forEach(l=>{
+        const b = document.getElementById("lang-"+l);
+        if(!b) return;
+        b.classList.toggle("active", l === lang);
+      });
+
+      // Replace content
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.getAttribute("data-i18n");
+        const value = (i18n[lang] && i18n[lang][key]) ? i18n[lang][key] : (i18n.en[key] || "");
+        if(!value) return;
+        el.textContent = value;
+      });
+
+      // Update status label if connected
+      const isConnected = !!localStorage.getItem("botc_wallet");
+      const statusText = document.getElementById("statusText");
+      if(statusText){
+        statusText.textContent = isConnected ? i18n[lang].statusConnected : i18n[lang].statusNotConnected;
+      }
+    }
+
+    function setLang(lang){
+      localStorage.setItem("botc_lang", lang);
+      applyTranslations(lang);
+    }
+
+    /* =========================
+       WALLET CONNECT (MetaMask)
+       - Simple and safe: only reads address + chainId
+       ========================= */
+    async function connectWallet(){
+      const lang = localStorage.getItem("botc_lang") || "en";
+
+      if(!window.ethereum){
+        alert({
+          en: "MetaMask not detected. Please install MetaMask to connect.",
+          pt: "MetaMask não detetada. Instala a MetaMask para ligar.",
+          fr: "MetaMask non détecté. Installez MetaMask pour vous connecter.",
+          de: "MetaMask nicht erkannt. Bitte MetaMask installieren, um zu verbinden."
+        }[lang]);
+        return;
+      }
+
+      try{
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        const address = accounts && accounts[0] ? accounts[0] : null;
+        const chainId = await window.ethereum.request({ method: "eth_chainId" });
+
+        if(address){
+          localStorage.setItem("botc_wallet", address);
+          localStorage.setItem("botc_chain", chainId || "");
+          renderWalletUI();
+          applyTranslations(lang);
+        }
+      }catch(err){
+        // User rejected or error
+        console.log("connectWallet error:", err);
+      }
+    }
+
+    function disconnectWallet(){
+      localStorage.removeItem("botc_wallet");
+      localStorage.removeItem("botc_chain");
+      renderWalletUI();
+      const lang = localStorage.getItem("botc_lang") || "en";
+      applyTranslations(lang);
+    }
+
+    function shortAddr(a){
+      if(!a || a.length < 10) return a || "—";
+      return a.slice(0,6) + "…" + a.slice(-4);
+    }
+
+    function chainName(chainId){
+      const map = {
+        "0x1":"Ethereum",
+        "0x38":"BNB Chain",
+        "0x89":"Polygon",
+        "0xa86a":"Avalanche",
+        "0xa":"Optimism",
+        "0xa4b1":"Arbitrum"
+      };
+      return map[chainId] || chainId || "—";
+    }
+
+    function renderWalletUI(){
+      const addr = localStorage.getItem("botc_wallet");
+      const chain = localStorage.getItem("botc_chain");
+
+      const addrText = document.getElementById("addrText");
+      const netText  = document.getElementById("netText");
+      const statusDot = document.getElementById("statusDot");
+      const btnDisconnect = document.getElementById("btnDisconnect");
+
+      if(addrText) addrText.textContent = addr ? shortAddr(addr) : "—";
+      if(netText)  netText.textContent = addr ? chainName(chain) : "—";
+
+      const connected = !!addr;
+      if(statusDot){
+        statusDot.classList.toggle("ok", connected);
+      }
+      if(btnDisconnect){
+        btnDisconnect.style.display = connected ? "inline-flex" : "none";
+      }
+    }
+
+    // Auto-refresh on account/network changes
+    if(window.ethereum){
+      window.ethereum.on("accountsChanged", (acc)=>{
+        if(acc && acc[0]){
+          localStorage.setItem("botc_wallet", acc[0]);
+        }else{
+          localStorage.removeItem("botc_wallet");
+        }
+        renderWalletUI();
+        const lang = localStorage.getItem("botc_lang") || "en";
+        applyTranslations(lang);
+      });
+      window.ethereum.on("chainChanged", (cid)=>{
+        localStorage.setItem("botc_chain", cid || "");
+        renderWalletUI();
+      });
+    }
+
+    // Init
+    (function init(){
+      renderWalletUI();
+      const lang = localStorage.getItem("botc_lang") || "en";
+      applyTranslations(lang);
+    })();
+  </script>
 </body>
 </html>
