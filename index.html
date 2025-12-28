@@ -3,41 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <title>BOTC — Botcoin Project</title>
-<!-- Language Switcher -->
-<div class="lang-switch">
-  <button onclick="setLang('en')">EN</button>
-  <button onclick="setLang('pt')">PT</button>
-  <button onclick="setLang('fr')">FR</button>
-  <button onclick="setLang('de')">DE</button>
-</div>
+</head>
 
+<body>
 
-<main class="container">
-  <h1 id="t_title">BOTC — Botcoin Project</h1>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span id="t_brand">BOTC</span>
+    </div>
 
-  <p class="subtitle" id="t_subtitle">
-    A community-driven crypto project built with responsibility, transparency, and long-term vision.
-  </p>
+    <nav class="nav">
+      <a href="#about" id="t_nav_about">About</a>
+      <a href="#tokenomics" id="t_nav_tokenomics">Tokenomics</a>
+      <a href="#presale" id="t_nav_presale">Presale</a>
+      <a href="#roadmap" id="t_nav_roadmap">Roadmap</a>
+      <a href="#faq" id="t_nav_faq">FAQ</a>
+    </nav>
 
-  <section class="notice">
-    <h2 id="t_noticeTitle">Important Notice</h2>
+    <div class="lang-switch">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('pt')">PT</button>
+      <button onclick="setLang('fr')">FR</button>
+      <button onclick="setLang('de')">DE</button>
+    </div>
+  </div>
 
-    <p id="t_noticeP1">
-      Cryptocurrency involves risk. BOTC does not guarantee profits, returns, or financial gains of any kind.
-    </p>
+  <!-- Main content -->
+  <main class="container">
 
-    <p id="t_noticeP2">
-      Nothing on this website constitutes financial advice.
-    </p>
-  </section>
+    <section class="hero">
+      <h1 id="t_title">BOTC — Botcoin Project</h1>
+      <p class="subtitle" id="t_subtitle">
+        A community-driven crypto project built with responsibility, transparency, and long-term vision.
+      </p>
 
-  <footer>
-    <p id="t_footer">© 2025 BOTC Project — All rights reserved.</p>
-  </footer>
-</main>
+      <div class="cta-row">
+        <a class="btn primary" href="#tokenomics" id="t_cta_tokenomics">View Tokenomics</a>
+        <a class="btn" href="#presale" id="t_cta_presale">Presale Info</a>
+        <a class="btn" href="#faq" id="t_cta_faq">Read FAQ</a>
+      </div>
+    </section>
 
-<script src="js/lang.js"></script>
+    <section class="grid">
 
+      <div class="card" id="about">
+        <h2 id="t_about_title">What is BOTC?</h2>
+        <p id="t_about_text">
+          BOTC is a community-driven crypto project focused on transparency, ethics, and long-term building.
+        </p>
+      </div>
+
+      <div class="card" id="tokenomics">
+        <h2 id="t_tok_title">Tokenomics</h2>
+        <p id="t_tok_text">
+          Supply, distribution, and ecosystem rules will be published with full clarity and public updates.
+        </p>
+      </div>
+
+      <div class="card" id="presale">
+        <h2 id="t_pre_title">Presale</h2>
+        <p id="t_pre_text">
+          Presale details will be shared only through official channels. Never share your seed phrase.
+        </p>
+      </div>
+
+      <div class="card" id="roadmap">
+        <h2 id="t_road_title">Roadmap</h2>
+        <p id="t_road_text">
+          Step-by-step development: infrastructure, security, transparency, then product expansion.
+        </p>
+      </div>
+
+      <div class="card" id="faq">
+        <h2 id="t_faq_title">FAQ</h2>
+        <p id="t_faq_text">
+          We publish updates clearly. No unrealistic promises. No guarantees. Use at your own risk.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 id="t_security_title">Security</h2>
+        <p id="t_security_text">
+          Never share your seed phrase. BOTC team will never ask for it. Beware of impersonators.
+        </p>
+      </div>
+
+    </section>
+
+    <section class="notice">
+      <h2 id="t_noticeTitle">Important Notice</h2>
+      <p id="t_noticeP1">
+        Cryptocurrency involves risk. BOTC does not guarantee profits, returns, or financial gains of any kind.
+      </p>
+      <p id="t_noticeP2">
+        Nothing on this website constitutes financial advice.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <span id="t_footer">© 2025 BOTC Project — All rights reserved.</span>
+      <span>
+        <a href="legal/terms.html" id="t_terms">Terms</a> ·
+        <a href="legal/privacy.html" id="t_privacy">Privacy</a>
+      </span>
+    </footer>
+
+  </main>
+
+  <!-- JS sempre no fim -->
+  <script src="js/lang.js"></script>
 
 </body>
 </html>
