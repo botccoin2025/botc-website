@@ -146,4 +146,53 @@ a{ color: inherit; text-decoration: none; }
 @media (max-width: 880px){
   .nav{ display:none; }
   .card{ grid-column: span 12; }
+}/* =========================
+   FOUNDER IMAGES FIX
+   ========================= */
+
+.founder-poster {
+  width: 100%;
+  max-width: 720px;   /* tamanho controlado */
+  height: auto;
+  display: block;
+  margin: 32px auto;
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
+
+.founder-passport {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 16px;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+/* =========================
+   BRAND / AVATAR FIX
+   ========================= */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand-avatar {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
+}
+.brand-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.brand-sub {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
