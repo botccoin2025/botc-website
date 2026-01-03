@@ -408,6 +408,15 @@ header .container.nav{
   margin:0 auto 16px;
   border:2px solid rgba(255,255,255,.2);
 }
+.founder-poster{
+  width:100%;
+  max-width:300px;   /* 👈 tamanho ideal */
+  height:auto;
+  display:block;
+  margin:20px auto;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
 
 }
 
