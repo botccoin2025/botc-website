@@ -1,18 +1,26 @@
-/* BOTC Theme — premium blue */
+/* =========================================================
+   BOTC Theme — premium blue (CLEAN)
+   ========================================================= */
+
 :root{
   --bg0:#050B1A;
   --bg1:#06102A;
+
   --card: rgba(255,255,255,.06);
   --border: rgba(255,255,255,.12);
+
   --text:#EAF2FF;
   --muted: rgba(234,242,255,.75);
+
   --accent:#2F7BFF;
   --accent2:#26C6FF;
-  --shadow: 0 20px 60px rgba(0,0,0,.45);
+
+  --shadow: 0 18px 55px rgba(0,0,0,.45);
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
 html,body{ height:100%; }
+
 body{
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
   color: var(--text);
@@ -24,11 +32,31 @@ body{
 }
 
 a{ color: inherit; text-decoration: none; }
-.container{ max-width: 1100px; margin: 0 auto; padding: 28px 18px; }
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 18px;
+}
+
+/* =========================================================
+   TOPBAR / HEADER
+   ========================================================= */
 
 .topbar{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:14px;
+  position: sticky;
+  top: 12px;
+  z-index: 50;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 18px;
+
   padding: 14px 18px;
   border: 1px solid var(--border);
   background: rgba(255,255,255,.04);
@@ -37,29 +65,62 @@ a{ color: inherit; text-decoration: none; }
   backdrop-filter: blur(10px);
 }
 
+/* BRAND (logo + title) */
 .brand{
-  display:flex; align-items:center; gap:10px;
-  font-weight: 800;
-  letter-spacing: .3px;
-}
-.brand-dot{
-  width:10px; height:10px; border-radius:50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  box-shadow: 0 0 18px rgba(47,123,255,.45);
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  min-width: 260px;
 }
 
+.brand-avatar{
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
+}
+
+.brand-title{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .4px;
+}
+
+.brand-sub{
+  font-size: 12px;
+  opacity: .75;
+}
+
+/* NAV LINKS */
 .nav{
-  display:flex; gap:14px; align-items:center;
+  display:flex;
+  gap: 14px;
+  align-items:center;
+
   color: var(--muted);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
 }
-.nav a{ padding: 8px 10px; border-radius: 10px; }
-.nav a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
 
-.lang-switch{
-  display:flex; gap:8px; align-items:center;
+.nav a{
+  padding: 8px 10px;
+  border-radius: 10px;
 }
+
+.nav a:hover{
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+}
+
+/* LANGUAGE SWITCH (se estiveres a usar) */
+.lang-switch{
+  display:flex;
+  gap: 8px;
+  align-items:center;
+}
+
 .lang-switch button{
   padding: 7px 10px;
   border-radius: 12px;
@@ -67,13 +128,18 @@ a{ color: inherit; text-decoration: none; }
   background: rgba(0,0,0,.18);
   color: var(--text);
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 12px;
 }
+
 .lang-switch button:hover{
   border-color: rgba(47,123,255,.55);
   box-shadow: 0 0 0 4px rgba(47,123,255,.12);
 }
+
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero{
   margin-top: 18px;
@@ -88,24 +154,41 @@ a{ color: inherit; text-decoration: none; }
   backdrop-filter: blur(10px);
 }
 
-.hero h1{ font-size: clamp(30px, 4vw, 46px); line-height: 1.12; }
-.subtitle{ margin-top: 10px; color: var(--muted); font-size: 16px; max-width: 760px; }
+.hero h1{
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.12;
+}
 
-.cta-row{ margin-top: 18px; display:flex; gap:12px; flex-wrap:wrap; }
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding: 10px 14px;
+.subtitle{
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 760px;
+}
+
+/* se usares uma imagem no HERO com class="hero-poster" */
+.hero-poster{
+  width: 100%;
+  max-width: 520px;   /* <<< controla o tamanho */
+  height: auto;
+  display: block;
+  margin: 22px auto 0;
   border-radius: 14px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.05);
-  font-weight: 800;
-  cursor:pointer;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
-.btn.primary{
-  border-color: rgba(47,123,255,.6);
-  background: linear-gradient(135deg, rgba(47,123,255,.28), rgba(38,198,255,.18));
+
+/* =========================================================
+   SECTIONS / CARDS
+   ========================================================= */
+
+.section{
+  padding: 26px 0;
 }
-.btn:hover{ box-shadow: 0 0 0 4px rgba(38,198,255,.10); }
+
+.section h2{
+  font-size: 26px;
+  margin-bottom: 14px;
+}
 
 .grid{
   margin-top: 18px;
@@ -113,6 +196,7 @@ a{ color: inherit; text-decoration: none; }
   grid-template-columns: repeat(12, 1fr);
   gap: 14px;
 }
+
 .card{
   grid-column: span 6;
   border-radius: 18px;
@@ -121,46 +205,22 @@ a{ color: inherit; text-decoration: none; }
   padding: 18px;
   box-shadow: var(--shadow);
 }
-.card h2{ font-size: 18px; margin-bottom: 10px; }
-.card p{ color: var(--muted); }
 
-.notice{
-  margin-top: 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,120,120,.25);
-  background: rgba(255,60,60,.06);
-  padding: 18px;
-}
-.notice h2{ margin-bottom: 8px; }
-.notice p{ color: rgba(234,242,255,.85); }
-
-.footer{
-  margin: 22px 0 10px;
-  color: rgba(234,242,255,.65);
-  font-size: 13px;
-  display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;
-}
-.footer a{ text-decoration: underline; opacity: .9; }
-.footer a:hover{ opacity:1; }
-
-@media (max-width: 880px){
-  .nav{ display:none; }
-  .card{ grid-column: span 12; }
-}/* =========================
-   FOUNDER IMAGES FIX
-   ========================= */
-
-.founder-poster {
-  width: 100%;
-  max-width: 720px;   /* tamanho controlado */
-  height: auto;
-  display: block;
-  margin: 32px auto;
-  border-radius: 14px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+.card h3{
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-.founder-passport {
+.card p{
+  color: var(--muted);
+}
+
+/* =========================================================
+   FOUNDER IMAGES (FIXED SIZES)
+   ========================================================= */
+
+/* Foto redonda */
+.founder-passport{
   width: 140px;
   height: 140px;
   object-fit: cover;
@@ -169,66 +229,69 @@ a{ color: inherit; text-decoration: none; }
   margin: 0 auto 16px;
   border: 2px solid rgba(255,255,255,0.2);
 }
-/* =========================
-   BRAND / AVATAR FIX
-   ========================= */
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.brand-avatar {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 auto;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
-}
-.brand-title {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-.brand-sub {
-  font-size: 12px;
-  opacity: 0.7;
-}
-/* Header layout */
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
-
-/* Brand */
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  min-width: 260px;
-}
-
-.brand-avatar{
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  object-fit:cover;
-  display:block;
-}
-
-.brand-title{ font-size:20px; font-weight:800; }
-.brand-sub{ font-size:13px; opacity:.75; } 
-
-.hero-poster{
-  width:100%;
-  max-width:520px;
-  height:auto;
-  display:block;
-  margin: 22px auto;
+/* Poster (NÃO enorme) */
+.founder-poster{
+  width: 100%;
+  max-width: 520px;   /* <<< baixa aqui se quiseres (ex: 420px) */
+  height: auto;
+  display: block;
+  margin: 18px auto 28px;
   border-radius: 14px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
+
+/* =========================================================
+   NOTICE / DISCLAIMER
+   ========================================================= */
+
+.notice{
+  margin-top: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,120,120,.25);
+  background: rgba(255,60,60,.06);
+  padding: 18px;
+}
+
+.notice h3{ margin-bottom: 8px; }
+.notice p{ color: rgba(234,242,255,.85); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+  margin: 22px 0 10px;
+  color: rgba(234,242,255,.65);
+  font-size: 13px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:space-between;
+}
+
+.footer a{
+  text-decoration: underline;
+  opacity: .9;
+}
+
+.footer a:hover{ opacity: 1; }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 880px){
+  .nav{ display:none; }
+  .card{ grid-column: span 12; }
+
+  .brand{ min-width: auto; }
+  .topbar{ top: 8px; }
+
+  .brand-avatar{
+    width: 44px;
+    height: 44px;
+  }
+}
+
 
