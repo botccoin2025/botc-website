@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BOTC — Official Web3 Security Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --blue: #2e64fe; --gold: #ffd700; --dark: #0a0b10; --card: #161a27; --red: #ff4d4d; }
+        body { font-family: 'Inter', sans-serif; background: var(--dark); color: #f4f4f4; margin: 0; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        header { padding: 15px 0; border-bottom: 1px solid #1f222e; background: rgba(10, 11, 16, 0.9); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.5rem; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .btn-wallet { background: transparent; border: 1.5px solid var(--blue); color: var(--blue); padding: 8px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-wallet:hover { background: var(--blue); color: white; }
+
+        .hero { padding: 80px 0; text-align: center; background: radial-gradient(circle at top, #1a233a 0%, #0a0b10 100%); }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 900; }
+        .btn-main { background: var(--blue); color: white; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 10px 20px rgba(46, 100, 254, 0.3); border: none; }
+
+        .grid-main { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin: 40px 0; }
+        .card { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid #1f222e; }
+        .security-alert { border: 1px solid var(--red); background: rgba(255, 77, 77, 0.05); margin-top: 20px; }
+        
+        .sponsor-gold { border: 1px solid var(--gold); background: rgba(255, 215, 0, 0.05); padding: 20px; border-radius: 15px; text-align: center; }
+        .ad-space { background: #000; border: 1px dashed #444; border-radius: 15px; padding: 20px; text-align: center; margin-top: 20px; }
+
+        #google_translate_element { display: none; }
+        .lang-flag { font-size: 1.5rem; cursor: pointer; text-decoration: none; opacity: 0.7; transition: 0.3s; }
+        .lang-flag:hover { opacity: 1; transform: scale(1.2); }
+
+        @media (max-width: 768px) { .grid-main { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+
+<div id="google_translate_element"></div>
+
+<header>
+    <div class="container nav">
+        <div class="brand">
+            <img src="file (4) (2).svg" width="40" alt="BOTC"> BOTC
+        </div>
+        <div class="nav-right">
+            <a onclick="doGTranslate('en|pt')" class="lang-flag" title="Português">🇵🇹</a>
+            <a onclick="doGTranslate('en|en')" class="lang-flag" title="English">🇺🇸</a>
+            <a onclick="doGTranslate('en|fr')" class="lang-flag" title="Français">🇫🇷</a>
+            <button class="btn-wallet" onclick="alert('Iniciando conexão Web3... Por favor, use MetaMask ou Trust Wallet.')">CONNECT WALLET</button>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>Transparency is our <span style="color: var(--blue);">Power.</span></h1>
+        <p>A maior barreira contra scammers na rede BSC. Estrutura real para investidores reais.</p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+            <a href="https://pancakeswap.finance/swap?outputCurrency=0x087e6005Be1078436B424d852A0777B846959888" target="_blank" class="btn-main">BUY BOTC NOW</a>
+            <a href="https://poocoin.app/tokens/0x087e6005Be1078436B424d852A0777B846959888" target="_blank" class="btn-main" style="background: transparent; border: 2px solid var(--blue);">LIVE CHART</a>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="grid-main">
+        
+        <div class="card">
+            <h3 style="color: var(--blue); margin-top:0;">🛡️ BOTC Holder Dashboard</h3>
+            <p>Aqui, a transparência não é uma opção, é a base. Se vieste para tentar enganar a nossa comunidade, estás no sítio errado.</p>
+            <div style="background: #0a0b10; padding: 25px; border-radius: 15px; margin: 20px 0; border: 1px solid #1f222e;">
+                <small style="color: #666; font-weight: bold;">YOUR BOTC BALANCE</small>
+                <div style="font-size: 2.5rem; font-weight: 900; color: #fff;">0.00 <span style="font-size: 1rem; color: var(--blue);">BOTC</span></div>
+                <div style="color: #00ff00; font-size: 0.8rem; margin-top: 5px;">● Verified Holder Status</div>
+            </div>
+            
+            <div class="card security-alert">
+                <h4 style="color: var(--red); margin-top: 0;">🛑 SCAMMER ALERT & POLICY</h4>
+                <p style="font-size: 0.85rem; margin-bottom: 0;">Qualquer tentativa de phishing resultará em banimento imediato. O BOTC é um projeto comunitário focado em segurança. Nunca peça a Seed Phrase de outros utilizadores.</p>
+            </div>
+        </div>
+
+        <aside>
+            <div class="sponsor-gold">
+                <h4 style="color: var(--gold); margin-top:0;">⭐ ELITE SPONSOR</h4>
+                <p style="font-size: 0.8rem; color: #aeb4c1;">Espaço reservado para parceiros auditados. O lucro reverte para queima de tokens.</p>
+                <a href="mailto:botcoinbotc@outlook.fr" style="color: var(--gold); font-size: 0.8rem; text-decoration: none; font-weight: bold;">BECOME A SPONSOR ↗</a>
+            </div>
+            
+            <div class="ad-space">
+                <p style="color: #444; font-size: 0.7rem; margin: 0; font-weight: bold;">ADVERTISING ZONE</p>
+                <div style="height: 100px; display: flex; align-items: center; justify-content: center; color: #333; font-size: 0.8rem;">
+                    Space Available for Partners
+                </div>
+            </div>
+        </aside>
+
+    </div>
+</div>
+
+<section class="container" style="padding-bottom: 80px;">
+    <div class="card" style="border: 1px solid #333; background: #000;">
+        <h3 style="margin-top:0;">Legal & Safety Responsibility</h3>
+        <p style="font-size: 0.85rem; color: #888;">
+            O BOTC opera com tolerância zero contra fraudes. Não somos conselheiros financeiros. O investimento em ativos digitais envolve risco elevado. A segurança da sua carteira é responsabilidade sua. Scammers serão reportados às autoridades da rede BSC.
+        </p>
+    </div>
+</section>
+
+<footer style="text-align: center; padding: 40px; border-top: 1px solid #1f222e; color: #444;">
+    <p>© 2026 BOTC Founder Transparency. No scams, just structure.</p>
+</footer>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+    function doGTranslate(lang_pair) {
+        var lang = lang_pair.split('|')[1];
+        var teCombo = document.querySelector('.goog-te-combo');
+        if (teCombo) { 
+            teCombo.value = lang; 
+            teCombo.dispatchEvent(new Event('change')); 
+        }
+    }
+</script>
+
+</body>
+</html>
