@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOTC – Official Web3 Security Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --blue: #00d4ff; 
+            --silver: #e2e8f0; 
+            --silver-glow: rgba(226, 232, 240, 0.2);
+            --dark-bg: #020617; 
+            --card-bg: rgba(15, 23, 42, 0.9); 
+            --gold: #ffd700;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--dark-bg); 
+            background-image: linear-gradient(rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.95)), url('bg-tech.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            color: #f8fafc; margin: 0; overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+
+        header { 
+            padding: 15px 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(20px); 
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--silver-glow);
+        }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 1.5rem; text-decoration: none; color: #fff; }
+        .brand img { border: 2px solid var(--silver); border-radius: 50%; box-shadow: 0 0 10px var(--blue); }
+
+        .hero { 
+            padding: 150px 0 100px; text-align: center; 
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.2), var(--dark-bg)), url('hero-bot.jpg');
+            background-size: cover; background-position: center; border-bottom: 1px solid var(--silver-glow);
+        }
+        .hero-super-title { color: var(--blue); font-weight: bold; letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .hero h1 { font-size: 6rem; font-weight: 900; margin: 0; letter-spacing: -3px; color: #fff; }
+        .hero h2 { font-size: 2.5rem; font-weight: 700; color: var(--silver); margin: 15px 0 35px; }
+
+        .card { 
+            background: var(--card-bg); padding: 40px; border-radius: 30px; 
+            border: 1px solid var(--silver); box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--silver-glow);
+            backdrop-filter: blur(10px); margin-bottom: 30px;
+        }
+
+        .btn-buy { 
+            background: linear-gradient(45deg, var(--blue), #0077ff); color: white; 
+            padding: 22px 55px; border-radius: 60px; text-decoration: none; 
+            font-weight: 900; font-size: 1.2rem; cursor: pointer; border: none;
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4); display: inline-block;
+        }
+
+        /* MODAL DE COMPLIANCE */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); display: none; align-items: center; justify-content: center; z-index: 2000;
+        }
+        .modal-content {
+            background: var(--dark-bg); width: 90%; max-width: 650px; padding: 40px;
+            border-radius: 30px; border: 2px solid var(--silver); box-shadow: 0 0 40px var(--silver-glow);
+        }
+        .modal-text {
+            height: 300px; overflow-y: auto; background: #000; padding: 20px;
+            border-radius: 15px; border: 1px solid #1e293b; font-size: 0.85rem; color: #94a3b8; line-height: 1.6; margin: 20px 0;
+            text-align: left;
+        }
+        .checkbox-container { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; cursor: pointer; text-align: left;}
+        .btn-confirm {
+            width: 100%; padding: 18px; border-radius: 50px; border: none;
+            background: #1e293b; color: #444; font-weight: bold; cursor: not-allowed; transition: 0.3s;
+        }
+        .btn-confirm.active { background: var(--blue); color: white; cursor: pointer; box-shadow: 0 0 20px var(--blue); }
+
+        .grid-main { display: grid; grid-template-columns: 2fr 1fr; gap: 35px; margin: 50px 0; }
+        footer { text-align: center; padding: 40px; color: var(--silver-dark); border-top: 1px solid var(--silver-glow); }
+        
+        @media (max-width: 900px) { .hero h1 { font-size: 3.5rem; } .grid-main { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="modal-overlay" id="termsModal">
+    <div class="modal-content">
+        <h2 style="color: var(--blue); margin-top: 0; display: flex; align-items: center; gap: 10px; justify-content: center;">
+            ⚖️ PROTOCOLO DE COMPLIANCE
+        </h2>
+        <div class="modal-text">
+            <p><strong>ARTIGO I:</strong> Ao interagir com o contrato BOTC, o utilizador assume total responsabilidade pela sua decisão financeira.</p>
+            <p><strong>ARTIGO II:</strong> O projeto segue as diretrizes internacionais de ativos digitais e transparência Web3.</p>
+            <p><strong>ARTIGO III:</strong> Repudiamos qualquer atividade ilícita (AML/CTF). Colaboramos com a integridade da rede BSC.</p>
+            <p><strong>ARTIGO IV:</strong> O investidor declara ciência da volatilidade do mercado cripto.</p>
+            <p><strong>ARTIGO V:</strong> A lei soberana deste acordo é o Smart Contract registado na Blockchain.</p>
+            <p style="color: var(--silver);">Fundador Responsável: José Santos.</p>
+        </div>
+        <label class="checkbox-container">
+            <input type="checkbox" id="termsCheckbox" onchange="toggleButton()"> 
+            <span style="font-size: 0.85rem; font-weight: bold;">DECLARO QUE LI E ACEITO OS ARTIGOS DE LEI DO BOTC.</span>
+        </label>
+        <button class="btn-confirm" id="confirmBtn" onclick="goToPancake()">CONFIRMAR INVESTIMENTO SEGURO</button>
+        <button onclick="closeModal()" style="width: 100%; background: transparent; border: none; color: #666; margin-top: 15px; cursor: pointer;">Recusar e Sair</button>
+    </div>
+</div>
+
+<header>
+    <div class="container nav">
+        <a href="#" class="brand"><img src="logo-coin.jpg" width="45" height="45"> BOTC PLATFORM</a>
+        <button style="background:transparent; border:1px solid var(--silver); color:var(--silver); padding:8px 20px; border-radius:50px;">CONNECT WALLET</button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <span class="hero-super-title">THE SILVER STANDARD OF BSC</span>
+        <h1>BOTC</h1>
+        <h2>Transparency is our Power.</h2>
+        <button onclick="openModal()" class="btn-buy">GET BOTC ON PANCAKESWAP</button>
+    </div>
+</section>
+
+<div class="container grid-main">
+    <div class="card">
+        <h2 style="color: var(--blue); margin-top:0;">🛡️ DASHBOARD</h2>
+        <div style="background: #000; padding: 35px; border-radius: 20px; border: 1px solid var(--silver); text-align: center;">
+            <small style="color: #94a3b8;">TAXA DE OPERAÇÃO</small>
+            <div style="font-size: 3.5rem; font-weight: 900;">1.5%</div>
+        </div>
+    </div>
+    <aside>
+        <div class="card" style="border-color: var(--gold);">
+            <h3 style="color: var(--gold); margin-top:0;">🌟 SPONSOR</h3>
+            <p>Seja um parceiro oficial.</p>
+        </div>
+    </aside>
+</div>
+
+<footer>
+    <p>© 2026 BOTC Platform | Sob Direção de José Santos</p>
+</footer>
+
+<script>
+    const modal = document.getElementById('termsModal');
+    const checkbox = document.getElementById('termsCheckbox');
+    const btn = document.getElementById('confirmBtn');
+
+    function openModal() { modal.style.display = 'flex'; }
+    function closeModal() { modal.style.display = 'none'; }
+
+    function toggleButton() {
+        if (checkbox.checked) {
+            btn.classList.add('active');
+            btn.style.cursor = 'pointer';
+        } else {
+            btn.classList.remove('active');
+            btn.style.cursor = 'not-allowed';
+        }
+    }
+
+    function goToPancake() {
+        if (checkbox.checked) {
+            window.open('https://pancakeswap.finance/swap?outputCurrency=0x087e6005Be1078436B424d852A0777B846959888', '_blank');
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
