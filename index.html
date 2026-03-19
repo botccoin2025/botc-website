@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOTC – Official Web3 Security Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --blue: #00d4ff; 
+            --silver: #e2e8f0; 
+            --silver-dark: #94a3b8;
+            --silver-glow: rgba(226, 232, 240, 0.2);
+            --dark-bg: #020617; 
+            --card-bg: rgba(15, 23, 42, 0.85); 
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--dark-bg); 
+            /* Imagem de fundo de circuitos com baixa opacidade */
+            background-image: linear-gradient(rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.9)), url('bg-tech.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            color: #f8fafc; 
+            margin: 0; 
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+
+        /* HEADER PROFISSIONAL */
+        header { 
+            padding: 15px 0; 
+            background: rgba(2, 6, 23, 0.8); 
+            backdrop-filter: blur(20px); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            border-bottom: 1px solid var(--silver-glow);
+        }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 15px; font-weight: 900; font-size: 1.8rem; text-decoration: none; color: #fff; }
+        .brand img { border: 2px solid var(--silver); border-radius: 50%; box-shadow: 0 0 15px var(--blue); }
+
+        .btn-wallet { 
+            background: transparent; 
+            border: 1px solid var(--silver); 
+            color: var(--silver); 
+            padding: 10px 25px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.3s;
+        }
+        .btn-wallet:hover { border-color: var(--blue); color: var(--blue); box-shadow: 0 0 15px var(--blue); }
+
+        /* HERO COM IMAGEM DO ROBÔ */
+        .hero { 
+            padding: 160px 0 120px; 
+            text-align: center; 
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.2), var(--dark-bg)), url('hero-bot.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--silver-glow);
+            margin-bottom: 50px;
+        }
+        .hero h1 { font-size: 4.5rem; font-weight: 900; margin: 0; letter-spacing: -2px; line-height: 1; }
+        .hero p { font-size: 1.4rem; color: var(--silver-dark); margin: 25px 0 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+        /* CARDS COM CONTORNO PRATEADO */
+        .card { 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 30px; 
+            border: 1px solid var(--silver); /* O CONTORNO PRATEADO */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--silver-glow);
+            backdrop-filter: blur(10px);
+            transition: 0.4s;
+            position: relative;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--blue); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2); }
+
+        /* DASHBOARD ELEMENTS */
+        .balance-display {
+            background: #000;
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--silver-glow);
+            margin: 25px 0;
+            text-align: center;
+        }
+        .tokenomics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .stat-box { 
+            background: rgba(255,255,255,0.03); 
+            border: 1px solid var(--silver-glow); 
+            padding: 15px; 
+            border-radius: 15px; 
+            text-align: center; 
+        }
+
+        .btn-buy { 
+            background: linear-gradient(45deg, var(--blue), #0077ff); 
+            color: white; 
+            padding: 22px 55px; 
+            border-radius: 60px; 
+            text-decoration: none; 
+            font-weight: 900; 
+            font-size: 1.2rem;
+            display: inline-block;
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+            transition: 0.3s;
+        }
+        .btn-buy:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(0, 212, 255, 0.6); }
+
+        .grid-main { display: grid; grid-template-columns: 2fr 1fr; gap: 35px; margin-bottom: 80px; }
+
+        footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--silver-glow); color: var(--silver-dark); font-size: 0.9rem; }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.8rem; }
+            .grid-main { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav">
+        <a href="#" class="brand">
+            <img src="logo-coin.jpg" width="55" height="55" alt="BOTC"> 
+            BOTC PLATFORM
+        </a>
+        <button class="btn-wallet" onclick="alert('Conectando à sua carteira Web3...')">CONNECT WALLET</button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <span style="color: var(--blue); font-weight: bold; letter-spacing: 3px; text-transform: uppercase;">The Silver Standard of BSC</span>
+        <h1>Transparency is our <span style="color: var(--blue);">Power.</span></h1>
+        <p>Segurança metálica e inteligência artificial unidas para proteger o seu investimento na rede Binance Smart Chain.</p>
+        <a href="https://pancakeswap.finance/swap?outputCurrency=0x087e6005Be1078436B424d852A0777B846959888" target="_blank" class="btn-buy">GET BOTC ON PANCAKESWAP</a>
+    </div>
+</section>
+
+<div class="container grid-main">
+    <main>
+        <div class="card">
+            <h2 style="margin-top:0; color: var(--blue);">🛡️ HOLDER DASHBOARD</h2>
+            <p style="color: var(--silver-dark);">Monitorização em tempo real dos seus ativos BOTC e métricas de queima.</p>
+            
+            <div class="balance-display">
+                <small style="color: var(--silver-dark); letter-spacing: 2px;">YOUR BALANCE</small>
+                <div style="font-size: 3.5rem; font-weight: 900; margin: 10px 0;">0.00 <span style="font-size: 1.5rem; color: var(--blue);">BOTC</span></div>
+                <div style="color: #10b981; font-size: 0.9rem;">● Secure Wallet Connection Active</div>
+            </div>
+
+            <h4 style="margin-bottom: 15px; font-size: 0.9rem; color: var(--silver);">TOKENOMICS ESTRUTURADA</h4>
+            <div class="tokenomics-grid">
+                <div class="stat-box">
+                    <small style="color: var(--silver-dark);">BUY TAX</small>
+                    <div style="font-size: 1.3rem; font-weight: bold; color: var(--blue);">1.5%</div>
+                </div>
+                <div class="stat-box">
+                    <small style="color: var(--silver-dark);">SELL TAX</small>
+                    <div style="font-size: 1.3rem; font-weight: bold; color: var(--blue);">1.5%</div>
+                </div>
+                <div class="stat-box">
+                    <small style="color: var(--silver-dark);">BURN</small>
+                    <div style="font-size: 1.3rem; font-weight: bold; color: var(--gold);">0.5%</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+        <div class="card" style="border-color: var(--gold); background: linear-gradient(135deg, rgba(255,215,0,0.05), transparent);">
+            <h3 style="color: var(--gold); margin-top:0;">🌟 ELITE SPONSOR</h3>
+            <p style="font-size: 0.85rem; color: var(--silver-dark);">Espaço reservado para parceiros auditados. O próximo passo da elite Web3.</p>
+            <a href="mailto:botcoinbotc@outlook.fr" style="color: var(--gold); text-decoration: none; font-weight: bold; border-bottom: 1px solid var(--gold);">Be a Partner →</a>
+        </div>
+        
+        <div class="card" style="margin-top: 25px; padding: 25px;">
+            <h4 style="margin-top:0;">CONTRACT</h4>
+            <div style="font-family: monospace; font-size: 0.75rem; background: #000; padding: 10px; border-radius: 10px; color: #00ffcc; word-break: break-all;">
+                0x087e6005Be1078436B424d852A0777B846959888
+            </div>
+            <button onclick="navigator.clipboard.writeText('0x087e6005Be1078436B424d852A0777B846959888'); alert('Copied!')" style="width: 100%; margin-top: 10px; background: #1e293b; border: none; color: white; padding: 8px; border-radius: 5px; cursor: pointer;">Copy Address</button>
+        </div>
+    </aside>
+</div>
+
+<div class="container" style="margin-bottom: 100px;">
+    <div class="card" style="border-style: dashed; background: #000;">
+        <h3 style="margin-top:0;">Founder's Legal Commitment</h3>
+        <p style="color: var(--silver-dark); line-height: 1.8;">
+            O projeto <strong>BOTCOIN (BOTC)</strong> é liderado e fundado por <strong>José Santos</strong>. Esta plataforma opera com transparência absoluta. Todas as diretrizes, segurança do contrato e comunicações são coordenadas pessoalmente pelo fundador, com auxílio de IA de última geração, garantindo que o projeto permaneça sólido e fiel ao seu Roadmap. Não somos conselheiros financeiros, somos construtores de tecnologia.
+        </p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 BOTC Platform. Built with transparency, protected by silver standards.</p>
+    <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.5;">Under the direction and full legal responsibility of José Santos.</p>
+</footer>
+
+</body>
+</html>
